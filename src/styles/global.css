@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-family: 'Nunito Sans', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        'wdth' 100,
+        'YTLC' 500;
+}
+
+@layer base {
+    h1 {
+        @apply text-4xl;
+        font-weight: 900;
+    }
+    h2 {
+        @apply text-2xl;
+        font-weight: 700;
+    }
+    h3 {
+        @apply text-xl;
+        font-weight: 700;
+    }
+    p {
+        @apply text-base;
+    }
+}
