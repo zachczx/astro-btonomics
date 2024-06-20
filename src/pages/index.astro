@@ -4,6 +4,8 @@ import MaterialCalendarMonthOutline from '../components/svg/MaterialCalendarMont
 import MaterialSubject from '../components/svg/MaterialSubject.astro'
 import FormattedDate from '../components/FormattedDate.astro'
 import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
+import headerImage from '../content/blog/honestReviews/images/36_upload_IMG_20180730_204953.jpg'
 
 const allHonestReviewsPosts = await getCollection('blog', ({ id }) => {
     return id.startsWith('honestReviews')
@@ -20,9 +22,21 @@ const allGeneralPosts = await getCollection('blog', ({ id }) => {
 const allRenovationPosts = await getCollection('blog', ({ id }) => {
     return id.startsWith('renovation')
 })
+const allPosts = await getCollection('blog')
+
+/** Get list of IDs */
+let arrayTest = []
+allPosts.forEach((item) => {
+    let pushName = `${item.data.id}` //, ${item.data.title}`
+    arrayTest.push(pushName)
+})
+console.log(arrayTest.sort())
 ---
 
 <Layout title="Home">
+    <!-- <div class="flex justify-center">
+        <Image src={headerImage} alt="header image" height="400" />
+    </div> -->
     <main class="flex justify-center">
         <div class="grid gap-14 md:grid-cols-2">
             <div class="">
