@@ -39,9 +39,9 @@ console.log(arrayTest.sort())
     </div> -->
     <main class="flex justify-center">
         <div class="grid gap-14 md:grid-cols-2">
-            <div class="">
+            <div class="col-span-2">
                 <h2 class="py-2">Honest Reviews</h2>
-                <div class="space-y-8 border-2 border-neutral p-4">
+                <div class="grid grid-cols-2 gap-8 border-2 border-neutral p-4">
                     {
                         allHonestReviewsPosts.map((entry) => (
                             <div class="">
@@ -79,11 +79,11 @@ console.log(arrayTest.sort())
                     }
                 </div>
             </div>
-            <div class="">
-                <h2 class="py-2">Maintenance</h2>
+            <div class="row-span-2">
+                <h2 class="py-2">Renovation</h2>
                 <div class="space-y-8 border-2 border-neutral p-4">
                     {
-                        allMaintenancePosts.map((entry) => (
+                        allRenovationPosts.map((entry) => (
                             <div class="">
                                 <a href={entry.slug}>
                                     <h3 class="title text-primary hover:underline group-hover:text-base-100">
@@ -100,10 +100,10 @@ console.log(arrayTest.sort())
                 </div>
             </div>
             <div class="">
-                <h2 class="py-2">Renovation</h2>
+                <h2 class="py-2">Maintenance</h2>
                 <div class="space-y-8 border-2 border-neutral p-4">
                     {
-                        allRenovationPosts.map((entry) => (
+                        allMaintenancePosts.map((entry) => (
                             <div class="">
                                 <a href={entry.slug}>
                                     <h3 class="title text-primary hover:underline group-hover:text-base-100">
