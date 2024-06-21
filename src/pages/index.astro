@@ -53,12 +53,12 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                 <p>Choices. Buys. Regrets. Lessons.</p>
             </div>
         </div>
-        <div class="text-center">
+        <div class="col-span-2 text-center md:col-span-1">
             <a href="/renovation/our-clean-bto-home-design">
                 <Image src={headerImage0} alt="header image 0" height="650" class="" />
             </a>
         </div>
-        <div class="text-center">
+        <div class="col-span-2 text-center md:col-span-1">
             <a href="/honest-reviews/4-room-bto-design-completed-home"
                 ><Image src={headerImage} alt="header image" height="650" class="" />
             </a>
@@ -84,15 +84,13 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                     >Budget Guide: Shopping and Taobao Shipping to Singapore
                 </a>
             </div> -->
-
-            <div class="p-8"></div>
         </div>
     </div>
-    <main class="flex justify-center">
+    <main class="flex justify-center pt-8">
         <div class="grid gap-14 md:grid-cols-2">
             <div class="col-span-2">
                 <h2 class="py-2"><a href="/honest-reviews">Honest Reviews</a></h2>
-                <div class="grid grid-cols-2 gap-12 border-2 border-base-content p-4">
+                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                     {
                         allHonestReviewsPosts.map((entry) => (
                             <div class="">
@@ -112,7 +110,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
             </div>
             <div class="col-span-2">
                 <h2 class="py-2"><a href="/shopping">Shopping</a></h2>
-                <div class="grid grid-cols-2 gap-12 border-2 border-base-content p-4">
+                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                     {
                         allShoppingPosts.map((entry) => (
                             <div class="">
@@ -132,7 +130,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
             </div>
             <div class="col-span-2">
                 <h2 class="py-2"><a href="/renovation">Renovation</a></h2>
-                <div class="grid grid-cols-2 gap-12 border-2 border-base-content p-4">
+                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                     {
                         allRenovationPosts.map((entry) => (
                             <div class="">
@@ -152,7 +150,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
             </div>
             <div class="col-span-2">
                 <h2 class="py-2"><a href="/maintenance">Maintenance</a></h2>
-                <div class="grid grid-cols-2 gap-12 border-2 border-base-content p-4">
+                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                     {
                         allMaintenancePosts.map((entry) => (
                             <div class="">
@@ -172,7 +170,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
             </div>
             <div class="col-span-2">
                 <h2 class="py-2"><a href="/general">General</a></h2>
-                <div class="grid grid-cols-2 gap-12 border-2 border-base-content p-4">
+                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                     {
                         allGeneralPosts.map((entry) => (
                             <div class="">
