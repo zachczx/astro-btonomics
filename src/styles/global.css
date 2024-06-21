@@ -26,7 +26,4 @@
         @apply text-xl;
         font-weight: 700;
     }
-    p {
-        @apply text-base;
-    }
 }
