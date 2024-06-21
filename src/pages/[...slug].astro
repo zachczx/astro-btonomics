@@ -21,6 +21,13 @@ const { Content } = await entry.render()
     <div class="mb-14">
         <h1 class="title">{entry.data.title}</h1>
         <FormattedDate date={entry.data.pubDate} />
+        <div>
+            {
+                entry.data.tags.map((tag) => {
+                    return <span class="btn btn-outline btn-xs me-2">{tag}</span>
+                })
+            }
+        </div>
     </div>
     <Prose>
         <Content />
