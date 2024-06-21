@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+
+export async function getStaticPaths() {
+    return [
+        { params: { category: 'shopping' } },
+        { params: { category: 'honest-reviews' } },
+        { params: { category: 'general' } },
+        { params: { category: 'renovation' } },
+        { params: { category: 'maintenance' } },
+    ]
+}
+
+const { category } = Astro.params
+console.log(category)
+
+const blogShoppingEntries = await getCollection('blog', ({ slug }) => {
+    return slug.includes(`${category}/`)
+})
+
+let cleanCategory
+if (category === 'honest-reviews') {
+    cleanCategory = 'Honest Reviews'
+} else if (category === 'shopping') {
+    cleanCategory = 'Shopping'
+} else if (category === 'general') {
+    cleanCategory = 'General'
+} else if (category === 'maintenance') {
+    cleanCategory = 'Maintenance'
+} else if (category === 'renovation') {
+    cleanCategory = 'Renovation'
+}
+---
+
+<Layout title="">
+    <div class="mb-14">
+        <h2 class="py-2">{cleanCategory}</h2>
+        <div class="grid grid-cols-2 gap-12 border-2 border-base-content p-4">
+            {
+                blogShoppingEntries.map((entry) => (
+                    <div class="">
+                        <a href={entry.slug}>
+                            <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                {entry.data.title}
+                            </h3>
+                            <div class="flex items-center stroke-neutral-content text-sm text-neutral-content group-hover:text-base-100">
+                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                <FormattedDate date={entry.data.pubDate} />
+                            </div>
+                        </a>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</Layout>
