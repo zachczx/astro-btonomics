@@ -3,15 +3,26 @@ import { ViewTransitions } from 'astro:transitions'
 import '../styles/global.css'
 import Layout from '../layouts/Layout.astro'
 import Prose from '../components/Prose.astro'
+import aboutPic from '../images/20161126_105337.jpg'
+import floorPlan from '../content/blog/renovation/images/3_concept0.5.png'
+import Picture from 'astro/components/Picture.astro'
 ---
 
 <Layout title="About Us">
     <div class="mb-14">
         <h1>About Us</h1>
     </div>
+
     <Prose>
         <h2>Our HDB home</h2>
         <p>Home is in Bukit Batok, a 4-room HDB flat roughly 92sqm. It's pretty small.</p>
+        <Picture
+            src={floorPlan}
+            formats={['avif', 'webp']}
+            alt="Floor plan"
+            width="700"
+            class="mb-4"
+        />
         <p>
             Sometimes we wish we bought a 5-room flat instead. Especially when we visit or see other
             5-room flats, or think about having to fit multiple kids inside.
@@ -43,7 +54,14 @@ import Prose from '../components/Prose.astro'
         </p>
 
         <h2>Who we are</h2>
-        <p>
+
+        <Picture
+            src={aboutPic}
+            formats={['avif', 'webp']}
+            alt="That's us"
+            width="600"
+            class="mb-4"
+        /><p>
             This is a space where we track our milestones - our renovation process, our furniture
             shopping, our key collection. Like every couple out there, we buy stuff. We often face a
             dilemma. Do we buy cheap, or do we buy good? If it’s cheap, it ain’t good, and if it’s
