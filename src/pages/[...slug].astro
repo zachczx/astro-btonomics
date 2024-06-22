@@ -18,13 +18,18 @@ const { Content } = await entry.render()
 ---
 
 <Layout title={entry.data.title}>
-    <div class="mb-14 px-6">
+    <div class="mb-14">
         <h1>{entry.data.title}</h1>
         <FormattedDate date={entry.data.pubDate} />
         <div>
             {
-                entry.data.tags.map((tag) => {
-                    return <span class="btn btn-outline btn-xs me-2">{tag}</span>
+                entry.data.tags.map((tag, index) => {
+                    return (
+                        <span class="text-xs">
+                            {tag}
+                            {index + 1 < entry.data.tags.length ? '/ ' : ''}
+                        </span>
+                    )
                 })
             }
         </div>

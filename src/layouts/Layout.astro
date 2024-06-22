@@ -42,12 +42,13 @@ const { title } = Astro.props
                         tabindex="0"
                         class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
                     >
-                        <li><a>Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="/honest-reviews">Honest Reviews</a></li>
                         <li><a href="/renovation">Renovation</a></li>
                         <li><a href="/shopping">Shopping</a></li>
                         <li><a href="/maintenance">Maintenance</a></li>
                         <li><a href="/general">General</a></li>
+                        <li><a href="/about-us">About</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,22 +61,40 @@ const { title } = Astro.props
                     >
                 </div>
                 <div class="dropdown hidden md:flex">
-                    <div tabindex="0" role="button" class="btn btn-ghost text-base">Blog</div>
+                    <div tabindex="0" role="button" class="btn btn-ghost text-base font-bold">
+                        Blog<svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            ><path
+                                fill="currentColor"
+                                d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z"></path></svg
+                        >
+                    </div>
                     <ul
                         tabindex="0"
-                        class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+                        class="menu dropdown-content menu-sm z-[1] mt-10 w-52 rounded-box border-2 border-gray-500 bg-base-100 p-2 shadow"
                     >
-                        <li><a>Home</a></li>
-                        <li><a href="/honest-reviews">Honest Reviews</a></li>
-                        <li><a href="/renovation">Renovation</a></li>
-                        <li><a href="/shopping">Shopping</a></li>
-                        <li><a href="/maintenance">Maintenance</a></li>
-                        <li><a href="/general">General</a></li>
+                        <li class="border-b border-b-gray-600"><a href="/">Home</a></li>
+                        <li class="border-b border-b-gray-600">
+                            <a href="/honest-reviews">Honest Reviews</a>
+                        </li>
+                        <li class="border-b border-b-gray-600">
+                            <a href="/renovation">Renovation</a>
+                        </li>
+                        <li class="border-b border-b-gray-600"><a href="/shopping">Shopping</a></li>
+                        <li class="border-b border-b-gray-600">
+                            <a href="/maintenance">Maintenance</a>
+                        </li>
+                        <li class="border-b border-b-gray-600"><a href="/general">General</a></li>
                         <li><a href="/about-us">About</a></li>
                     </ul>
                 </div>
-                <div class="hidden md:flex"><a href="/about-us">About</a></div>
-                <div class="hidden md:flex"><a href="https://old.btonomics.com/">Old</a></div>
+                <div class="hidden font-bold md:flex"><a href="/about-us">About</a></div>
+                <div class="hidden font-bold md:flex">
+                    <a href="https://old.btonomics.com/">Old</a>
+                </div>
             </div>
             <div class="navbar-end">
                 <button class="btn btn-circle btn-ghost hidden">
