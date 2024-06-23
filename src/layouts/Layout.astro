@@ -13,8 +13,11 @@ const { title } = Astro.props
 <html lang="en" data-theme="night">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
+        <meta
+            name="description"
+            content="A blog for budget conscious people renovating their home."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>BTOnomics - {title}</title>
@@ -24,7 +27,12 @@ const { title } = Astro.props
         <div class="navbar mb-10">
             <div class="navbar-start self-start md:opacity-0">
                 <div class="dropdown -mt-1">
-                    <div tabindex="0" role="button" class="btn btn-circle btn-ghost">
+                    <div
+                        tabindex="0"
+                        role="button"
+                        class="btn btn-circle btn-ghost"
+                        aria-label="Menu"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="h-5 w-5"
