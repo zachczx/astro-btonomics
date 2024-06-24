@@ -56,12 +56,25 @@ console.log(arrayTest.sort((a, b) => a - b)) */
         </div>
         <div class="col-span-2 text-center md:col-span-1">
             <a href="/renovation/our-clean-bto-home-design">
-                <Image src={headerImage0} alt="header image 0" height="650" class="" />
+                <Image
+                    src={headerImage0}
+                    alt=""
+                    loading="eager"
+                    widths={[400, 700]}
+                    sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
+                />
             </a>
         </div>
         <div class="col-span-2 text-center md:col-span-1">
             <a href="/honest-reviews/4-room-bto-design-completed-home"
-                ><Image src={headerImage} alt="header image" height="650" class="" />
+                ><Image
+                    src={headerImage}
+                    alt=""
+                    height="650"
+                    loading="eager"
+                    widths={[400, 700]}
+                    sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
+                />
             </a>
         </div>
         <div class="grid items-center text-xl font-extrabold">
