@@ -43,42 +43,43 @@ console.log(arrayTest.sort((a, b) => a - b)) */
 ---
 
 <Layout title="Home">
-    <div class="-mt-10 grid grid-cols-2 justify-items-center gap-4">
-        <div class="bg-base-00 col-span-2 flex min-h-24 w-full items-center justify-center">
-            <div class="text-center text-2xl font-extrabold">
-                <p>
-                    This is a blog on <span class="text-primary"
-                        >renovating our HDB home on a budget</span
-                    >.
-                </p>
-                <p>Choices. Buys. Regrets. Lessons.</p>
+    <aside data-pagefind-ignore>
+        <div class="-mt-10 grid grid-cols-2 justify-items-center gap-4">
+            <div class="bg-base-00 col-span-2 flex min-h-24 w-full items-center justify-center">
+                <div class="text-center text-2xl font-extrabold">
+                    <p>
+                        This is a blog on <span class="text-primary"
+                            >renovating our HDB home on a budget</span
+                        >.
+                    </p>
+                    <p>Choices. Buys. Regrets. Lessons.</p>
+                </div>
             </div>
-        </div>
-        <div class="col-span-2 text-center md:col-span-1">
-            <a href="/renovation/our-clean-bto-home-design">
-                <Image
-                    src={headerImage0}
-                    alt=""
-                    loading="eager"
-                    widths={[400, 700]}
-                    sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
-                />
-            </a>
-        </div>
-        <div class="col-span-2 text-center md:col-span-1">
-            <a href="/honest-reviews/4-room-bto-design-completed-home"
-                ><Image
-                    src={headerImage}
-                    alt=""
-                    height="650"
-                    loading="eager"
-                    widths={[400, 700]}
-                    sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
-                />
-            </a>
-        </div>
-        <div class="grid items-center text-xl font-extrabold">
-            <!-- <div class="p-8">
+            <div class="col-span-2 text-center md:col-span-1">
+                <a href="/renovation/our-clean-bto-home-design">
+                    <Image
+                        src={headerImage0}
+                        alt=""
+                        loading="eager"
+                        widths={[400, 700]}
+                        sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
+                    />
+                </a>
+            </div>
+            <div class="col-span-2 text-center md:col-span-1">
+                <a href="/honest-reviews/4-room-bto-design-completed-home"
+                    ><Image
+                        src={headerImage}
+                        alt=""
+                        height="650"
+                        loading="eager"
+                        widths={[400, 700]}
+                        sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
+                    />
+                </a>
+            </div>
+            <div class="grid items-center text-xl font-extrabold">
+                <!-- <div class="p-8">
                 <h2>Choosing</h2>
 
                 <a href="/shopping/should-you-buy-furniture-from-taobao-or-ikea"
@@ -98,112 +99,113 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                     >Budget Guide: Shopping and Taobao Shipping to Singapore
                 </a>
             </div> -->
-        </div>
-    </div>
-    <main class="flex justify-center pt-8">
-        <div class="grid gap-14 md:grid-cols-2">
-            <div class="col-span-2">
-                <h2 class="py-2"><a href="/honest-reviews">Honest Reviews</a></h2>
-                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
-                    {
-                        allHonestReviewsPosts.map((entry) => (
-                            <div class="">
-                                <a href={entry.slug}>
-                                    <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
-                                        {entry.data.title}
-                                    </h3>
-                                    <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
-                                        <MaterialCalendarMonthOutline class="mb-1 me-1" />
-                                        <FormattedDate date={entry.data.pubDate} />
-                                    </div>
-                                </a>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
-            <div class="col-span-2">
-                <h2 class="py-2"><a href="/shopping">Shopping</a></h2>
-                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
-                    {
-                        allShoppingPosts.map((entry) => (
-                            <div class="">
-                                <a href={entry.slug}>
-                                    <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
-                                        {entry.data.title}
-                                    </h3>
-                                    <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
-                                        <MaterialCalendarMonthOutline class="mb-1 me-1" />
-                                        <FormattedDate date={entry.data.pubDate} />
-                                    </div>
-                                </a>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
-            <div class="col-span-2">
-                <h2 class="py-2"><a href="/renovation">Renovation</a></h2>
-                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
-                    {
-                        allRenovationPosts.map((entry) => (
-                            <div class="">
-                                <a href={entry.slug}>
-                                    <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
-                                        {entry.data.title}
-                                    </h3>
-                                    <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
-                                        <MaterialCalendarMonthOutline class="mb-1 me-1" />
-                                        <FormattedDate date={entry.data.pubDate} />
-                                    </div>
-                                </a>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
-            <div class="col-span-2">
-                <h2 class="py-2"><a href="/maintenance">Maintenance</a></h2>
-                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
-                    {
-                        allMaintenancePosts.map((entry) => (
-                            <div class="">
-                                <a href={entry.slug}>
-                                    <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
-                                        {entry.data.title}
-                                    </h3>
-                                    <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
-                                        <MaterialCalendarMonthOutline class="mb-1 me-1" />
-                                        <FormattedDate date={entry.data.pubDate} />
-                                    </div>
-                                </a>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
-            <div class="col-span-2">
-                <h2 class="py-2"><a href="/general">General</a></h2>
-                <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
-                    {
-                        allGeneralPosts.map((entry) => (
-                            <div class="">
-                                <a href={entry.slug}>
-                                    <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
-                                        {entry.data.title}
-                                    </h3>
-                                    <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
-                                        <MaterialCalendarMonthOutline class="mb-1 me-1" />
-                                        <FormattedDate date={entry.data.pubDate} />
-                                    </div>
-                                </a>
-                            </div>
-                        ))
-                    }
-                </div>
             </div>
         </div>
-    </main>
+        <main class="flex justify-center pt-8">
+            <div class="grid gap-14 md:grid-cols-2">
+                <div class="col-span-2">
+                    <h2 class="py-2"><a href="/honest-reviews">Honest Reviews</a></h2>
+                    <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
+                        {
+                            allHonestReviewsPosts.map((entry) => (
+                                <div class="">
+                                    <a href={entry.slug}>
+                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                            {entry.data.title}
+                                        </h3>
+                                        <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
+                                            <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <FormattedDate date={entry.data.pubDate} />
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <h2 class="py-2"><a href="/shopping">Shopping</a></h2>
+                    <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
+                        {
+                            allShoppingPosts.map((entry) => (
+                                <div class="">
+                                    <a href={entry.slug}>
+                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                            {entry.data.title}
+                                        </h3>
+                                        <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
+                                            <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <FormattedDate date={entry.data.pubDate} />
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <h2 class="py-2"><a href="/renovation">Renovation</a></h2>
+                    <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
+                        {
+                            allRenovationPosts.map((entry) => (
+                                <div class="">
+                                    <a href={entry.slug}>
+                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                            {entry.data.title}
+                                        </h3>
+                                        <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
+                                            <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <FormattedDate date={entry.data.pubDate} />
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <h2 class="py-2"><a href="/maintenance">Maintenance</a></h2>
+                    <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
+                        {
+                            allMaintenancePosts.map((entry) => (
+                                <div class="">
+                                    <a href={entry.slug}>
+                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                            {entry.data.title}
+                                        </h3>
+                                        <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
+                                            <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <FormattedDate date={entry.data.pubDate} />
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <h2 class="py-2"><a href="/general">General</a></h2>
+                    <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
+                        {
+                            allGeneralPosts.map((entry) => (
+                                <div class="">
+                                    <a href={entry.slug}>
+                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                            {entry.data.title}
+                                        </h3>
+                                        <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
+                                            <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <FormattedDate date={entry.data.pubDate} />
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    </aside>
 </Layout>
 
 <style>

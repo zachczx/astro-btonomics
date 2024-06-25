@@ -108,31 +108,24 @@ const { title } = Astro.props
                     <a href="https://old.btonomics.com/">Old</a>
                 </div>
             </div>
-            <div class="navbar-end flex h-full lg:mt-4 lg:self-start">
-                <div class="hidden lg:flex">
-                    <Search
-                        id="search"
-                        className="pagefind-ui hidden"
-                        uiOptions={{ showImages: false }}
-                    />
-                    <button class="btn btn-circle btn-ghost" id="searchActivate">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class=""
-                            height="2em"
-                            width="2em"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
-                </div>
+            <div class="navbar-end h-full lg:mt-4 lg:self-start">
+                <a href="/search" class="btn btn-circle btn-ghost" id="searchActivate">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class=""
+                        height="2em"
+                        width="2em"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </a>
             </div>
         </div>
         <div class="flex justify-center">
@@ -181,57 +174,6 @@ const { title } = Astro.props
             Courier New,
             monospace;
     } */
-        </style>
-        <style is:global>
-            nav {
-                display: grid;
-                place-items: center;
-            }
-
-            .pagefind-ui {
-                --pagefind-ui-scale: 0.75;
-                --pagefind-ui-primary: navy;
-                --pagefind-ui-text: black;
-                --pagefind-ui-border: slategrey;
-                --pagefind-ui-border-width: 1px;
-                --pagefind-ui-border-radius: 0.25rem;
-                --pagefind-ui-font: sans-serif;
-
-                width: 50%;
-            }
-
-            .pagefind-ui.yellow {
-                --pagefind-ui-background: lightyellow;
-            }
-
-            .pagefind-ui.red {
-                --pagefind-ui-background: peachpuff;
-                width: 100%;
-            }
-
-            .pagefind-ui .pagefind-ui__drawer:not(.pagefind-ui__hidden) {
-                position: absolute;
-                left: 0;
-                right: 0;
-                margin-top: 0px;
-                z-index: 9999;
-                padding: 0 2em 1em;
-                overflow-y: auto;
-                box-shadow:
-                    0 10px 10px -5px rgba(0, 0, 0, 0.2),
-                    0 2px 2px 0 rgba(0, 0, 0, 0.1);
-                border-bottom-right-radius: var(--pagefind-ui-border-radius);
-                border-bottom-left-radius: var(--pagefind-ui-border-radius);
-                background-color: var(--pagefind-ui-background);
-            }
-
-            .pagefind-ui .pagefind-ui__result-link {
-                color: var(--pagefind-ui-primary);
-            }
-
-            .pagefind-ui .pagefind-ui__result-excerpt {
-                color: var(--pagefind-ui-text);
-            }
         </style>
     </body>
 </html>
