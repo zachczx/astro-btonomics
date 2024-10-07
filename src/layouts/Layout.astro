@@ -85,7 +85,7 @@ const { title } = Astro.props
                     <div
                         tabindex="0"
                         role="button"
-                        class="btn btn-ghost text-base font-bold hover:bg-base-100"
+                        class="btn btn-ghost text-base font-bold text-primary hover:bg-base-100 hover:text-accent"
                     >
                         Blog<svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -113,10 +113,11 @@ const { title } = Astro.props
                             <a href="/maintenance">Maintenance</a>
                         </li>
                         <li class="border-b border-b-gray-600"><a href="/general">General</a></li>
-                        <li><a href="/about-us">About</a></li>
                     </ul>
                 </div>
-                <div class="hidden font-bold md:flex"><a href="/about-us">About</a></div>
+                <div class="hidden font-bold md:flex">
+                    <a href="/about-us" class="text-primary hover:text-accent">About</a>
+                </div>
             </div>
             <div class="navbar-end h-full lg:mt-4 lg:self-start">
                 <a href="/search" class="btn btn-circle btn-ghost" id="searchActivate">

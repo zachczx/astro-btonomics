@@ -106,14 +106,14 @@ console.log(arrayTest.sort((a, b) => a - b)) */
             <div class="grid gap-14 md:grid-cols-2">
                 <div class="col-span-2" id="honest-reviews">
                     <h2 class="py-2">
-                        <a href="/honest-reviews">Honest Reviews</a>
+                        <a href="/honest-reviews" class="hover:text-accent">Honest Reviews</a>
                     </h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
                             allHonestReviewsPosts.map((entry) => (
                                 <div class="">
                                     <a href={entry.slug}>
-                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                        <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
                                             {entry.data.title}
                                         </h3>
                                         <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
@@ -127,13 +127,13 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                     </div>
                 </div>
                 <div class="col-span-2" id="shopping">
-                    <h2 class="py-2"><a href="/shopping">Shopping</a></h2>
+                    <h2 class="py-2"><a href="/shopping" class="hover:text-accent">Shopping</a></h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
                             allShoppingPosts.map((entry) => (
                                 <div class="">
                                     <a href={entry.slug}>
-                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                        <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
                                             {entry.data.title}
                                         </h3>
                                         <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
@@ -147,13 +147,15 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                     </div>
                 </div>
                 <div class="col-span-2" id="renovation">
-                    <h2 class="py-2"><a href="/renovation">Renovation</a></h2>
+                    <h2 class="py-2">
+                        <a href="/renovation" class="hover:text-accent">Renovation</a>
+                    </h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
                             allRenovationPosts.map((entry) => (
                                 <div class="">
                                     <a href={entry.slug}>
-                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                        <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
                                             {entry.data.title}
                                         </h3>
                                         <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
@@ -167,13 +169,15 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                     </div>
                 </div>
                 <div class="col-span-2" id="maintenance">
-                    <h2 class="py-2"><a href="/maintenance">Maintenance</a></h2>
+                    <h2 class="py-2">
+                        <a href="/maintenance" class="hover:text-accent">Maintenance</a>
+                    </h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
                             allMaintenancePosts.map((entry) => (
                                 <div class="">
                                     <a href={entry.slug}>
-                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                        <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
                                             {entry.data.title}
                                         </h3>
                                         <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
@@ -187,13 +191,13 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                     </div>
                 </div>
                 <div class="col-span-2" id="general">
-                    <h2 class="py-2"><a href="/general">General</a></h2>
+                    <h2 class="py-2"><a href="/general" class="hover:text-accent">General</a></h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
                             allGeneralPosts.map((entry) => (
                                 <div class="">
                                     <a href={entry.slug}>
-                                        <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
+                                        <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
                                             {entry.data.title}
                                         </h3>
                                         <div class="flex items-center stroke-base-content text-sm text-base-content group-hover:text-base-100">
