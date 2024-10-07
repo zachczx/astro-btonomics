@@ -9,7 +9,7 @@ export default defineConfig({
     build: {
         format: 'file',
     },
+    site: 'https://btonomics.com',
     integrations: [tailwind(), mdx(), pagefind(), sitemap()],
     prefetch: true,
-    site: 'https://btonomics.com',
 })

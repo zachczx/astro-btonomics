@@ -58,6 +58,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                         alt=""
                         loading="eager"
                         widths={[400, 700]}
+                        class="brightness-[0.9] saturate-50 hover:brightness-100 hover:saturate-100"
                         sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
                     />
                 </a>
@@ -70,37 +71,43 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                         height="650"
                         loading="eager"
                         widths={[400, 700]}
+                        class="brightness-[0.9] saturate-50 hover:brightness-100 hover:saturate-100"
                         sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
                     />
                 </a>
             </div>
-            <div class="grid items-center text-xl font-extrabold">
-                <!-- <div class="p-8">
-                <h2>Choosing</h2>
-
-                <a href="/shopping/should-you-buy-furniture-from-taobao-or-ikea"
-                    >Should You Buy Furniture from Taobao or Ikea?</a
-                >
-                <a href="/general/choosing-between-an-id-or-contractor"
-                    >Choosing Between an ID or Contractor</a
-                >
-            </div>
-            <div class="p-8">
-                <h2>Renovating</h2>
-
-                <a href="/shopping/taobao-vs-shopee-taobao-more-expensive-covid-19"
-                    >Taobao vs Shopee: Taobao is More Expensive After COVID-19
-                </a>
-                <a href="/shopping/how-to-buy-and-ship-from-taobao-to-singapore"
-                    >Budget Guide: Shopping and Taobao Shipping to Singapore
-                </a>
-            </div> -->
-            </div>
         </div>
+        <nav class="flex flex-wrap justify-center pt-8">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2em"
+                height="2em"
+                class="m-2 inline"
+                viewBox="0 0 24 24"
+                ><path fill="currentColor" d="M10 18v-2h4v2zm-4-5v-2h12v2zM3 8V6h18v2z"></path></svg
+            >
+            <a href="#honest-reviews" class="btn btn-outline btn-primary btn-sm m-2 rounded-none"
+                >Honest Reviews</a
+            >
+            <a href="#shopping" class="btn btn-outline btn-primary btn-sm m-2 rounded-none"
+                >Shopping</a
+            >
+            <a href="#renovation" class="btn btn-outline btn-primary btn-sm m-2 rounded-none"
+                >Renovation</a
+            >
+            <a href="#maintenance" class="btn btn-outline btn-primary btn-sm m-2 rounded-none"
+                >Maintenance</a
+            >
+            <a href="#general" class="btn btn-outline btn-primary btn-sm m-2 rounded-none"
+                >General</a
+            >
+        </nav>
         <main class="flex justify-center pt-8">
             <div class="grid gap-14 md:grid-cols-2">
-                <div class="col-span-2">
-                    <h2 class="py-2"><a href="/honest-reviews">Honest Reviews</a></h2>
+                <div class="col-span-2" id="honest-reviews">
+                    <h2 class="py-2">
+                        <a href="/honest-reviews">Honest Reviews</a>
+                    </h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
                             allHonestReviewsPosts.map((entry) => (
@@ -119,7 +126,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                         }
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2" id="shopping">
                     <h2 class="py-2"><a href="/shopping">Shopping</a></h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
@@ -139,7 +146,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                         }
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2" id="renovation">
                     <h2 class="py-2"><a href="/renovation">Renovation</a></h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
@@ -159,7 +166,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                         }
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2" id="maintenance">
                     <h2 class="py-2"><a href="/maintenance">Maintenance</a></h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
@@ -179,7 +186,7 @@ console.log(arrayTest.sort((a, b) => a - b)) */
                         }
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2" id="general">
                     <h2 class="py-2"><a href="/general">General</a></h2>
                     <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
                         {
