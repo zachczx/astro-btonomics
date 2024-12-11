@@ -9,6 +9,9 @@ export default defineConfig({
     build: {
         format: 'file',
     },
+    legacy: {
+        collections: true
+      },
     site: 'https://btonomics.com',
     integrations: [tailwind(), mdx(), pagefind(), sitemap()],
     prefetch: true,
