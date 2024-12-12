@@ -1,8 +1,12 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro'
-import FormattedDate from '../../components/FormattedDate.astro'
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+function StringtoParam(string) {
+    return string.toLowerCase().replace(' ', '-');
+}
 
 export async function getStaticPaths() {
     return [
@@ -11,27 +15,32 @@ export async function getStaticPaths() {
         { params: { category: 'general' } },
         { params: { category: 'renovation' } },
         { params: { category: 'maintenance' } },
-    ]
+    ];
 }
 
-const { category } = Astro.params
-console.log(category)
+const { category } = Astro.params;
+console.log(category);
 
-const blogShoppingEntries = await getCollection('blog', ({ slug }) => {
-    return slug.includes(`${category}/`)
-})
+const blogShoppingEntries = await getCollection('blog', ({ data }) => {
+    return StringtoParam(data.category) === category;
+});
 
-let cleanCategory
+blogShoppingEntries.forEach(
+    (entry) => (entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')),
+);
+blogShoppingEntries.sort((a, b) => a.data.pid - b.data.pid);
+
+let cleanCategory;
 if (category === 'honest-reviews') {
-    cleanCategory = 'Honest Reviews'
+    cleanCategory = 'Honest Reviews';
 } else if (category === 'shopping') {
-    cleanCategory = 'Shopping'
+    cleanCategory = 'Shopping';
 } else if (category === 'general') {
-    cleanCategory = 'General'
+    cleanCategory = 'General';
 } else if (category === 'maintenance') {
-    cleanCategory = 'Maintenance'
+    cleanCategory = 'Maintenance';
 } else if (category === 'renovation') {
-    cleanCategory = 'Renovation'
+    cleanCategory = 'Renovation';
 }
 ---
 
@@ -42,7 +51,7 @@ if (category === 'honest-reviews') {
             {
                 blogShoppingEntries.map((entry) => (
                     <div class="">
-                        <a href={entry.slug}>
+                        <a href={entry.data.category + '/' + entry.data.slug}>
                             <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
                                 {entry.data.title}
                             </h3>
