@@ -16,7 +16,7 @@ async function CleanAndSort() {
         entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
     })
 
-    posts.sort((a, b) => a.data.pid - b.data.pid)
+    posts.sort((a, b) => b.data.pid - a.data.pid)
 
     return posts
 }
@@ -25,7 +25,7 @@ async function FilterCleanSort(collection, filter) {
     const posts = collection.filter((entry) => {
         return entry.data.category === filter
     })
-    posts.sort((a, b) => a.data.pid - b.data.pid)
+    posts.sort((a, b) => b.data.pid - a.data.pid)
     return posts
 }
 

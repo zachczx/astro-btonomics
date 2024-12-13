@@ -24,7 +24,7 @@ async function CleanAndSort(category = '') {
         entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
     })
 
-    posts.sort((a, b) => a.data.pid - b.data.pid)
+    posts.sort((a, b) => b.data.pid - a.data.pid)
 
     return posts
 }
@@ -153,6 +153,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Honest Reviews')
+                                .sort((a, b) => b.data.pid - a.data.pid)
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -190,6 +191,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Shopping')
+                                .sort((a, b) => b.data.pid - a.data.pid)
                                 .map((entry) => (
                                     <div>
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -229,6 +231,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Renovation')
+                                .sort((a, b) => b.data.pid - a.data.pid)
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -268,6 +271,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Maintenance')
+                                .sort((a, b) => b.data.pid - a.data.pid)
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -304,6 +308,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'General')
+                                .sort((a, b) => b.data.pid - a.data.pid)
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
