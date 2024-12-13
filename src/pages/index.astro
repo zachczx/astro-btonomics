@@ -1,10 +1,9 @@
 ---
-import type { GetStaticPaths } from 'astro'
 import Layout from '../layouts/Layout.astro'
 import MaterialCalendarMonthOutline from '../components/svg/MaterialCalendarMonthOutline.astro'
 import MaterialSubject from '../components/svg/MaterialSubject.astro'
 import FormattedDate from '../components/FormattedDate.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, getEntry, render } from 'astro:content'
 import { Image } from 'astro:assets'
 import headerImage from '../images/36_upload_IMG_20180730_204953_header.jpg'
 import headerImage0 from '../images/3_concept1_header-topaz-enhance-4x.webp'
@@ -12,6 +11,7 @@ import { GetPid, GetUniqueTags } from '../lib/utils'
 
 async function CleanAndSort(category = '') {
     let posts
+
     if (category) {
         posts = await getCollection('blog', ({ data }) => {
             return data.category === category
@@ -35,9 +35,7 @@ const allRenovationPosts = await CleanAndSort('Renovation')
 const allMaintenancePosts = await CleanAndSort('Maintenance')
 const allGeneralPosts = await CleanAndSort('General')
 const allPosts = await CleanAndSort()
-
 const tagsList = await GetUniqueTags(allPosts)
-console.log(tagsList)
 
 // GetPid();
 ---
@@ -146,7 +144,7 @@ console.log(tagsList)
                 }
             </div>
         </nav>
-        <main class="flex justify-center pt-8">
+        <main class="pt-8">
             <div class="grid gap-14 md:grid-cols-2">
                 <div class="col-span-2" id="honest-reviews">
                     <h2 class="py-2">
@@ -300,7 +298,6 @@ console.log(tagsList)
                     </div>
                 </div>
             </div>
-            <!-- </main>  -->
         </main>
 
         <style>
@@ -317,5 +314,5 @@ console.log(tagsList)
                 background-attachment: fixed;
             }
         </style>
-    </aside></Layout
->
+    </aside>
+</Layout>

@@ -37,7 +37,6 @@ export async function getStaticPaths() {
     const blogEntriesUnsorted = await getCollection('blog')
     const blogEntries = blogEntriesUnsorted.sort((a, b) => a.data.category - b.data.category)
     const tagsList = await GetUniqueTags(blogEntries)
-    console.log('Tagslist: ', tagsList)
 
     return tagsList.map((tag) => {
         // console.log('Tag: ', tag)
@@ -55,8 +54,8 @@ const { filtered } = Astro.props
 const { tag } = Astro.params
 ---
 
-<Layout title="Home">
-    <aside data-pagefind-ignore>
+<Layout title="Tag">
+    <aside class="p-0" data-pagefind-ignore>
         <nav class="flex flex-wrap items-center justify-start pt-8 text-base">
             <div class="flex min-w-32">
                 <svg
@@ -127,7 +126,7 @@ const { tag } = Astro.params
             </div>
         </nav>
 
-        <main class="flex justify-center pt-8">
+        <main class="pt-16">
             <div class="grid gap-14 md:grid-cols-2">
                 <div
                     class={filtered.filter((entry) => entry.data.category === 'Honest Reviews')
