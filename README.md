@@ -1,3 +1,3 @@
 # Btonomics.com
 
-Rebuilding with Astro
+Rebuilt with Astro.
