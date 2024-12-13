@@ -1,5 +1,5 @@
 ---
-import type { GetStaticPaths } from 'astro'
+import type { InferGetStaticParamsType, InferGetStaticPropsType, GetStaticPaths } from 'astro'
 import Layout from '../../layouts/Layout.astro'
 import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro'
 import MaterialSubject from '../../components/svg/MaterialSubject.astro'
@@ -33,22 +33,22 @@ const allPosts = await CleanAndSort()
 const tagsList = await GetUniqueTags(allPosts)
 
 // 1. Generate a new path for every collection entry
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
     const blogEntriesUnsorted = await getCollection('blog')
     const blogEntries = blogEntriesUnsorted.sort((a, b) => a.data.category - b.data.category)
     const tagsList = await GetUniqueTags(blogEntries)
 
     return tagsList.map((tag) => {
-        // console.log('Tag: ', tag)
         const filtered = blogEntries.filter((filtered) => {
             return filtered.data.tags?.includes(tag)
         })
-        // for (let i = 0; i < filtered.length; i++) {
-        //     console.log('Filtered: ', filtered[i].data.slug)
-        // }
         return { params: { tag }, props: { filtered: filtered } }
     })
-}
+}) satisfies GetStaticPaths
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
 // 2. For your template, you can get the entry directly from the prop
 const { filtered } = Astro.props
 const { tag } = Astro.params
@@ -112,14 +112,23 @@ const { tag } = Astro.params
                 >
                 <span>Tags</span>
             </div>
+
+            <span id="current-tag" class="hidden" data-current={tag}></span>
             <div class="flex grow flex-wrap items-center text-sm">
                 {
-                    tagsList.map((tag) => (
-                        <a
-                            href={'/tag/' + tag}
-                            class="me-2 mt-1 border border-base-content/80 px-2 hover:border-accent hover:text-accent"
-                        >
-                            {tag}
+                    tagsList.map((t) => (
+                        <a href={'/tag/' + t} class="mt-2">
+                            {t === tag && (
+                                <span class="tag me-2 mt-1 border border-accent border-base-content/80 px-2 text-accent hover:border-accent hover:text-accent">
+                                    {t}
+                                </span>
+                            )}
+
+                            {t != tag && (
+                                <span class="tag me-2 mt-1 border border-base-content/80 px-2 hover:border-accent hover:text-accent">
+                                    {t}
+                                </span>
+                            )}
                         </a>
                     ))
                 }
