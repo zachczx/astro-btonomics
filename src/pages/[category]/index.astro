@@ -1,11 +1,11 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
 
 function StringtoParam(string) {
-    return string.toLowerCase().replace(' ', '-');
+    return string.toLowerCase().replace(' ', '-')
 }
 
 export async function getStaticPaths() {
@@ -15,41 +15,41 @@ export async function getStaticPaths() {
         { params: { category: 'general' } },
         { params: { category: 'renovation' } },
         { params: { category: 'maintenance' } },
-    ];
+    ]
 }
 
-const { category } = Astro.params;
-console.log(category);
+const { category } = Astro.params
+console.log(category)
 
-const blogShoppingEntries = await getCollection('blog', ({ data }) => {
-    return StringtoParam(data.category) === category;
-});
+const posts = await getCollection('blog', ({ data }) => {
+    return StringtoParam(data.category) === category
+})
 
-blogShoppingEntries.forEach(
+posts.forEach(
     (entry) => (entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')),
-);
-blogShoppingEntries.sort((a, b) => a.data.pid - b.data.pid);
+)
+posts.sort((a, b) => a.data.pid - b.data.pid)
 
-let cleanCategory;
+let cleanCategory
 if (category === 'honest-reviews') {
-    cleanCategory = 'Honest Reviews';
+    cleanCategory = 'Honest Reviews'
 } else if (category === 'shopping') {
-    cleanCategory = 'Shopping';
+    cleanCategory = 'Shopping'
 } else if (category === 'general') {
-    cleanCategory = 'General';
+    cleanCategory = 'General'
 } else if (category === 'maintenance') {
-    cleanCategory = 'Maintenance';
+    cleanCategory = 'Maintenance'
 } else if (category === 'renovation') {
-    cleanCategory = 'Renovation';
+    cleanCategory = 'Renovation'
 }
 ---
 
 <Layout title="">
-    <div class="mb-14">
+    <div class="mb-14" data-pagefind-ignore>
         <h2 class="py-2">{cleanCategory}</h2>
         <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
             {
-                blogShoppingEntries.map((entry) => (
+                posts.map((entry) => (
                     <div class="">
                         <a href={entry.data.category + '/' + entry.data.slug}>
                             <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
