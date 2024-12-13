@@ -1,23 +1,23 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { getCollection, render } from 'astro:content';
-import Prose from '../../components/Prose.astro';
+import Layout from '../../layouts/Layout.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+import { getCollection, render } from 'astro:content'
+import Prose from '../../components/Prose.astro'
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('blog');
+    const blogEntries = await getCollection('blog')
     return blogEntries.map((entry) => ({
         params: {
             category: entry.data.category.toLowerCase().replace(' ', '-'),
             id: entry.data.slug,
         },
         props: { entry },
-    }));
+    }))
 }
 // 2. For your template, you can get the entry directly from the prop
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { entry } = Astro.props
+const { Content } = await render(entry)
 ---
 
 <Layout title={entry.data.title}>
@@ -25,13 +25,13 @@ const { Content } = await render(entry);
         <h1>{entry.data.title}</h1>
         <div class="mt-4 text-base-content/60"><FormattedDate date={entry.data.pubDate} /></div>
         <div class="text-base-content/60">
-            {
+            <!-- {
                 entry.data.tags && (
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="1.3em"
-                        height="1.3em"
-                        class="cil:tags me-2 inline"
+                        width="1em"
+                        height="1em"
+                        class="cil:tags me-1 inline"
                         viewBox="0 0 512 512"
                     >
                         <>
@@ -50,15 +50,12 @@ const { Content } = await render(entry);
                         </>
                     </svg>
                 )
-            }
+            } -->
             {
                 entry.data.tags.map((tag, index) => {
                     return (
-                        <span class="">
-                            {tag}
-                            {index + 1 < entry.data.tags.length ? '/ ' : ''}
-                        </span>
-                    );
+                        <span class="me-2 border border-base-content/80 px-2 text-sm">{tag}</span>
+                    )
                 })
             }
         </div>

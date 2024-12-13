@@ -1,17 +1,48 @@
 ---
+import MaterialCalendarMonthOutline from './svg/MaterialCalendarMonthOutline.astro'
+
 interface Props {
-    date: Date;
+    date: Date
 }
 
-const { date } = Astro.props;
+const { date } = Astro.props
+
+// TODO: Eventually try out Intl.RelativeTimeFormat
+// https://stackoverflow.com/questions/67373795/how-to-use-intl-formatrelativetime-in-the-correct-way
+const postDate = new Date(date)
+const today = new Date()
+const day = 1000 * 3600 * 24
+const differenceDays = (today.getTime() - date.getTime()) / day
+let differenceString = ''
+
+if (differenceDays < 2) {
+    differenceString = `1 day ago`
+} else if (differenceDays >= 2 && differenceDays <= 30) {
+    const cleanDifferenceDays = Math.floor(differenceDays)
+    differenceString = `${cleanDifferenceDays} days ago`
+} else if (differenceDays > 30 && differenceDays < 60) {
+    differenceString = `1 month ago`
+} else if (differenceDays >= 60 && differenceDays < 365) {
+    const differenceMonths = Math.floor(differenceDays / 30)
+    differenceString = `${differenceMonths} months ago`
+} else if (differenceDays === 365) {
+    differenceString = `1 year ago`
+} else if (differenceDays > 365) {
+    const differenceYears = Math.floor(differenceDays / 365)
+    differenceString = `${differenceYears} years ago`
+}
 ---
 
 <time datetime={date.toISOString()}>
-    {
-        date.toLocaleDateString('en-us', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        })
-    }
+    <div
+        class="tooltip"
+        data-tip={'Posted on ' +
+            date.toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+            })}
+    >
+        {differenceString}
+    </div>
 </time>
