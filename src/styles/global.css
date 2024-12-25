@@ -4,6 +4,9 @@
 
 :root {
     font-family: 'Nunito Sans Variable', sans-serif;
+
+    /* Reserve space for scrollbar to prevent layout jumping */
+    scrollbar-gutter: stable;
 }
 
 @layer base {
