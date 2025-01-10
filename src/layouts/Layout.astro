@@ -29,7 +29,7 @@ const { title } = Astro.props;
     </head>
     <body>
         <div class="navbar mb-10 mt-4">
-            <div class="navbar-start self-start md:opacity-0">
+            <div class="navbar-start self-center md:opacity-0">
                 <div class="dropdown -mt-1">
                     <div
                         tabindex="0"
@@ -209,7 +209,7 @@ const { title } = Astro.props;
                     <a href="/about-us" class="text-primary hover:text-accent">About</a>
                 </div>
             </div>
-            <div class="navbar-end h-full lg:mt-4 lg:self-start">
+            <div class="navbar-end h-full lg:mt-4 self-center lg:self-start">
                 <a href="/search" class="btn btn-circle btn-ghost" id="searchActivate">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -229,8 +229,8 @@ const { title } = Astro.props;
                 </a>
             </div>
         </div>
-        <div class="flex justify-center">
-            <div class="p-4 md:max-w-screen-2xl md:p-8">
+        <div class="grid justify-items-center">
+            <div class="p-4 md:max-w-screen-2xl lg:p-8">
                 <slot />
             </div>
         </div>
