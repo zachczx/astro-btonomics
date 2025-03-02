@@ -22,8 +22,8 @@ const { Content } = await render(entry)
 
 <Layout title={entry.data.title}>
     <div class="mb-14 lg:max-w-[1024px]">
-        <h1>{entry.data.title}</h1>
-        <div class="mt-4 text-base-content/60"><FormattedDate date={entry.data.pubDate} /></div>
+        <h1 class="text-6xl font-bold">{entry.data.title}</h1>
+        <div class="text-base-content/60 mt-4"><FormattedDate date={entry.data.pubDate} /></div>
         <div class="text-base-content/60">
             <!-- {
                 entry.data.tags && (
@@ -54,7 +54,7 @@ const { Content } = await render(entry)
             {
                 entry.data.tags.map((tag, index) => {
                     return (
-                        <span class="me-2 border border-base-content/80 px-2 text-sm">{tag}</span>
+                        <span class="border-base-content/80 me-2 border px-2 text-sm">{tag}</span>
                     )
                 })
             }
