@@ -1,13 +1,13 @@
 ---
-import '../styles/global.css';
-import Footer from './Footer.astro';
-import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css'
+import Footer from './Footer.astro'
+import { ClientRouter } from 'astro:transitions'
 
 interface Props {
-    title: string;
+    title: string
 }
-import Search from 'astro-pagefind/components/Search';
-const { title } = Astro.props;
+import Search from 'astro-pagefind/components/Search'
+const { title } = Astro.props
 ---
 
 <!doctype html>
@@ -28,7 +28,7 @@ const { title } = Astro.props;
         <ClientRouter />
     </head>
     <body>
-        <div class="navbar mb-10 mt-4">
+        <div class="navbar mt-4 mb-10">
             <div class="navbar-start self-center md:opacity-0">
                 <div class="dropdown -mt-1">
                     <div
@@ -52,7 +52,7 @@ const { title } = Astro.props;
                     </div>
                     <ul
                         tabindex="0"
-                        class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+                        class="menu dropdown-content menu-sm rounded-box bg-base-100 z-1 mt-3 w-52 p-2 shadow-sm"
                     >
                         <li><a href="/">Home</a></li>
                         <li><a href="/honest-reviews">Honest Reviews</a></li>
@@ -64,17 +64,17 @@ const { title } = Astro.props;
                     </ul>
                 </div>
             </div>
-            <div class="navbar-center grid grid-cols-2 justify-items-center">
+            <div class="navbar-center grid grid-cols-3 justify-items-center">
                 <div class="col-span-3 md:pb-4">
                     <a href="/" class="self-center" transition:name="logo">
                         <div
-                            class="flex items-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text p-1 text-4xl font-extrabold tracking-tighter text-transparent md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl"
+                            class="from-primary via-accent to-primary flex items-center bg-linear-to-r bg-clip-text p-1 text-4xl font-extrabold tracking-tighter text-transparent md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl"
                         >
                             BTOn<svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="1em"
                                 height="1em"
-                                class="-mx-1 inline text-accent"
+                                class="text-accent -mx-1 inline"
                                 viewBox="0 0 24 24"
                                 ><path
                                     fill="currentColor"
@@ -83,12 +83,15 @@ const { title } = Astro.props;
                             >mics
                         </div></a
                     >
+                    <div class="col-span-2 text-center italic">
+                        A blog on our journey renovating our HDB home on a budget.
+                    </div>
                 </div>
                 <div class="dropdown hidden md:flex">
                     <div
                         tabindex="0"
                         role="button"
-                        class="btn btn-ghost text-base font-bold text-primary hover:bg-base-100 hover:text-accent"
+                        class="btn btn-ghost text-primary hover:bg-base-100 hover:text-accent text-base font-bold"
                     >
                         Blog<svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +105,7 @@ const { title } = Astro.props;
                     </div>
                     <ul
                         tabindex="0"
-                        class="menu dropdown-content menu-sm z-[1] mt-10 w-52 rounded-box border border-gray-500 bg-[#1c2c50] p-2 shadow"
+                        class="menu dropdown-content menu-sm rounded-box z-1 mt-10 w-52 border border-gray-500 bg-[#1c2c50] p-2 shadow-sm"
                     >
                         <li class="border-b border-b-white/10">
                             <a href="/"
@@ -206,10 +209,13 @@ const { title } = Astro.props;
                     </ul>
                 </div>
                 <div class="hidden font-bold md:flex">
+                    <a href="/search" class="text-primary hover:text-accent">Search</a>
+                </div>
+                <div class="hidden font-bold md:flex">
                     <a href="/about-us" class="text-primary hover:text-accent">About</a>
                 </div>
             </div>
-            <div class="navbar-end h-full lg:mt-4 self-center lg:self-start">
+            <div class="navbar-end h-full self-center lg:mt-4 lg:self-start">
                 <a href="/search" class="btn btn-circle btn-ghost" id="searchActivate">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -230,27 +236,27 @@ const { title } = Astro.props;
             </div>
         </div>
         <div class="grid justify-items-center">
-            <div class="p-4 md:max-w-screen-2xl lg:p-8">
+            <div class="p-4 md:max-w-(--breakpoint-2xl) lg:p-8">
                 <slot />
             </div>
         </div>
         <Footer />
         <script>
             function search(searchActivate, search) {
-                const searchActivateButton = document.getElementById(searchActivate);
-                const searchBox = document.getElementById(search);
+                const searchActivateButton = document.getElementById(searchActivate)
+                const searchBox = document.getElementById(search)
                 searchActivateButton?.addEventListener('click', (evt) => {
                     if (searchBox?.classList.contains('hidden')) {
-                        searchBox?.classList.remove('hidden');
+                        searchBox?.classList.remove('hidden')
                     } else {
-                        searchBox?.classList.add('hidden');
+                        searchBox?.classList.add('hidden')
                     }
-                });
+                })
             }
-            search('searchActivate', 'search');
+            search('searchActivate', 'search')
             document.addEventListener('astro:after-swap', () => {
-                search('searchActivate', 'search');
-            });
+                search('searchActivate', 'search')
+            })
         </script>
         <style is:global>
             /*     :root {
