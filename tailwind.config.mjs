@@ -8,15 +8,4 @@ export default {
             serif: ['Roboto Slab Variable'],
         },
     },
-    daisyui: {
-        themes: [
-            {
-                night: {
-                    ...require('daisyui/src/theming/themes')['night'],
-                    'base-300': '#020204',
-                },
-            },
-        ],
-    },
-    plugins: [require('daisyui'), require('@tailwindcss/typography')],
-};
+}
