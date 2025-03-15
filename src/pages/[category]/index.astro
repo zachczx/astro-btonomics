@@ -19,8 +19,6 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.params
-console.log(category)
-
 const posts = await getCollection('blog', ({ data }) => {
     return StringtoParam(data.category) === category
 })
@@ -47,7 +45,7 @@ if (category === 'honest-reviews') {
 <Layout title="">
     <div class="mb-14" data-pagefind-ignore>
         <h2 class="py-2">{cleanCategory}</h2>
-        <div class="grid gap-12 border-2 border-base-content p-4 md:grid-cols-2">
+        <div class="border-base-content grid gap-12 border-2 p-4 md:grid-cols-2">
             {
                 posts.map((entry) => (
                     <div class="">
@@ -55,8 +53,8 @@ if (category === 'honest-reviews') {
                             <h3 class="title text-primary hover:text-primary group-hover:text-base-100">
                                 {entry.data.title}
                             </h3>
-                            <div class="flex items-center stroke-neutral-content text-sm text-neutral-content group-hover:text-base-100">
-                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                            <div class="stroke-neutral-content text-neutral-content group-hover:text-base-100 flex items-center text-sm">
+                                <MaterialCalendarMonthOutline class="me-1 mb-1" />
                                 <FormattedDate date={entry.data.pubDate} />
                             </div>
                         </a>
