@@ -56,7 +56,7 @@ const { tag } = Astro.params
 
 <Layout title="Tag">
     <aside class="p-0" data-pagefind-ignore>
-        <nav class="flex flex-wrap items-center justify-start pt-8 text-base">
+        <!-- <nav class="flex flex-wrap items-center justify-start pt-8 text-base">
             <div class="flex min-w-32">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -96,9 +96,9 @@ const { tag } = Astro.params
                 class="btn btn-outline btn-sm m-2 rounded-none border-primary text-base text-primary hover:border-accent hover:bg-transparent hover:text-accent"
                 >General</a
             >
-        </nav>
-        <nav class="mt-4 flex items-center">
-            <div class="flex min-w-32">
+        </nav> -->
+        <nav class="mt-4 flex items-start">
+            <div class="flex min-w-32 py-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1.5em"
@@ -114,18 +114,16 @@ const { tag } = Astro.params
             </div>
 
             <span id="current-tag" class="hidden" data-current={tag}></span>
-            <div class="flex grow flex-wrap items-center text-sm">
+            <div class="flex grow flex-wrap items-center gap-2 text-sm">
                 {
                     tagsList.map((t) => (
-                        <a href={'/tag/' + t} class="mt-2">
+                        <a href={'/tag/' + t} class="">
                             {t === tag && (
-                                <span class="tag me-2 mt-1 border border-accent border-base-content/80 px-2 text-accent hover:border-accent hover:text-accent">
-                                    {t}
-                                </span>
+                                <span class="tag btn btn-accent h-auto rounded-full py-1">{t}</span>
                             )}
 
-                            {t != tag && (
-                                <span class="tag me-2 mt-1 border border-base-content/80 px-2 hover:border-accent hover:text-accent">
+                            {t !== tag && (
+                                <span class="tag btn-outline btn hover:btn-accent h-auto rounded-full py-1">
                                     {t}
                                 </span>
                             )}
@@ -145,10 +143,12 @@ const { tag } = Astro.params
                     id="honest-reviews"
                 >
                     <h2 class="py-2">
-                        <a href="/honest-reviews" class="hover:text-accent">Honest Reviews</a>
+                        <a href="/honest-reviews" class="hover:text-accent text-4xl"
+                            >Honest Reviews</a
+                        >
                     </h2>
                     <div
-                        class="grid gap-12 border-2 border-base-content p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
                     >
                         {
                             filtered
@@ -157,18 +157,33 @@ const { tag } = Astro.params
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
-                                            <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
+                                            <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                                 {entry.data.title}
                                             </h3>
-                                            <div class="mt-2 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
+                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
-                                            <div class="mt-1 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                {entry.data.tags.map((tag) => (
-                                                    <span class="me-2 border border-base-content/80 px-2">
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="1.3em"
+                                                    height="1.3em"
+                                                    class="prime:tags me-1 inline"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
+                                                    />
+                                                </svg>
+                                                {entry.data.tags.map((tag, i) => (
+                                                    <>
                                                         {tag}
-                                                    </span>
+                                                        {entry.data.tags.length - 1 !== i
+                                                            ? ', '
+                                                            : undefined}
+                                                    </>
                                                 ))}
                                             </div>
                                         </a>
@@ -184,9 +199,11 @@ const { tag } = Astro.params
                         : 'hidden'}
                     id="shopping"
                 >
-                    <h2 class="py-2"><a href="/shopping" class="hover:text-accent">Shopping</a></h2>
+                    <h2 class="py-2">
+                        <a href="/shopping" class="hover:text-accent text-4xl">Shopping</a>
+                    </h2>
                     <div
-                        class="grid gap-12 border-2 border-base-content p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
                     >
                         {
                             filtered
@@ -195,18 +212,33 @@ const { tag } = Astro.params
                                 .map((entry) => (
                                     <div>
                                         <a href={entry.data.category + '/' + entry.data.slug}>
-                                            <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
+                                            <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                                 {entry.data.title}
                                             </h3>
-                                            <div class="mt-2 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
+                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
-                                            <div class="mt-1 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                {entry.data.tags.map((tag) => (
-                                                    <span class="me-2 border border-base-content/80 px-2">
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="1.3em"
+                                                    height="1.3em"
+                                                    class="prime:tags me-1 inline"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
+                                                    />
+                                                </svg>
+                                                {entry.data.tags.map((tag, i) => (
+                                                    <>
                                                         {tag}
-                                                    </span>
+                                                        {entry.data.tags.length - 1 !== i
+                                                            ? ', '
+                                                            : undefined}
+                                                    </>
                                                 ))}
                                             </div>
                                         </a>
@@ -223,10 +255,10 @@ const { tag } = Astro.params
                     id="renovation"
                 >
                     <h2 class="py-2">
-                        <a href="/renovation" class="hover:text-accent">Renovation</a>
+                        <a href="/renovation" class="hover:text-accent text-4xl">Renovation</a>
                     </h2>
                     <div
-                        class="grid gap-12 border-2 border-base-content p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
                     >
                         {
                             filtered
@@ -235,18 +267,33 @@ const { tag } = Astro.params
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
-                                            <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
+                                            <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                                 {entry.data.title}
                                             </h3>
-                                            <div class="mt-2 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
+                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
-                                            <div class="mt-1 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                {entry.data.tags.map((tag) => (
-                                                    <span class="me-2 border border-base-content/80 px-2">
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="1.3em"
+                                                    height="1.3em"
+                                                    class="prime:tags me-1 inline"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
+                                                    />
+                                                </svg>
+                                                {entry.data.tags.map((tag, i) => (
+                                                    <>
                                                         {tag}
-                                                    </span>
+                                                        {entry.data.tags.length - 1 !== i
+                                                            ? ', '
+                                                            : undefined}
+                                                    </>
                                                 ))}
                                             </div>
                                         </a>
@@ -263,10 +310,10 @@ const { tag } = Astro.params
                     id="maintenance"
                 >
                     <h2 class="py-2">
-                        <a href="/maintenance" class="hover:text-accent">Maintenance</a>
+                        <a href="/maintenance" class="hover:text-accent text-4xl">Maintenance</a>
                     </h2>
                     <div
-                        class="grid gap-12 border-2 border-base-content p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
                     >
                         {
                             filtered
@@ -275,18 +322,33 @@ const { tag } = Astro.params
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
-                                            <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
+                                            <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                                 {entry.data.title}
                                             </h3>
-                                            <div class="mt-2 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
+                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
-                                            <div class="mt-1 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                {entry.data.tags.map((tag) => (
-                                                    <span class="me-2 border border-base-content/80 px-2">
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="1.3em"
+                                                    height="1.3em"
+                                                    class="prime:tags me-1 inline"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
+                                                    />
+                                                </svg>
+                                                {entry.data.tags.map((tag, i) => (
+                                                    <>
                                                         {tag}
-                                                    </span>
+                                                        {entry.data.tags.length - 1 !== i
+                                                            ? ', '
+                                                            : undefined}
+                                                    </>
                                                 ))}
                                             </div>
                                         </a>
@@ -301,9 +363,11 @@ const { tag } = Astro.params
                         : 'hidden'}
                     id="general"
                 >
-                    <h2 class="py-2"><a href="/general" class="hover:text-accent">General</a></h2>
+                    <h2 class="py-2">
+                        <a href="/general" class="hover:text-accent text-4xl">General</a>
+                    </h2>
                     <div
-                        class="grid gap-12 border-2 border-base-content p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 md:grid-cols-2 lg:p-8"
                     >
                         {
                             filtered
@@ -312,18 +376,33 @@ const { tag } = Astro.params
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
-                                            <h3 class="title text-primary underline hover:text-accent group-hover:text-base-100">
+                                            <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                                 {entry.data.title}
                                             </h3>
-                                            <div class="mt-2 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                <MaterialCalendarMonthOutline class="mb-1 me-1" />
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
+                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
-                                            <div class="mt-1 flex items-center stroke-base-content text-sm text-base-content/80 group-hover:text-base-100">
-                                                {entry.data.tags.map((tag) => (
-                                                    <span class="me-2 border border-base-content/80 px-2">
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="1.3em"
+                                                    height="1.3em"
+                                                    class="prime:tags me-1 inline"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
+                                                    />
+                                                </svg>
+                                                {entry.data.tags.map((tag, i) => (
+                                                    <>
                                                         {tag}
-                                                    </span>
+                                                        {entry.data.tags.length - 1 !== i
+                                                            ? ', '
+                                                            : undefined}
+                                                    </>
                                                 ))}
                                             </div>
                                         </a>

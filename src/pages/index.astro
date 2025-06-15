@@ -47,7 +47,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
 <Layout title="Home">
     <aside data-pagefind-ignore>
         <div class="-mt-10 grid grid-cols-2 justify-items-center gap-4">
-            <div class="col-span-2 text-center md:col-span-1">
+            <div class="col-span-2 pb-12 text-center md:col-span-1">
                 <a href="/renovation/our-clean-bto-home-design">
                     <Image
                         src={headerImage0}
@@ -72,8 +72,8 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                 </a>
             </div>
         </div>
-        <nav
-            class="flex flex-wrap items-center justify-start gap-y-2 pt-16 text-base lg:flex-nowrap"
+        <!-- <nav
+            class="flex flex-wrap items-center justify-start gap-y-2  text-base lg:flex-nowrap"
         >
             <div class="flex w-full min-w-32 lg:w-auto">
                 <svg
@@ -92,33 +92,33 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
             <div class="flex flex-wrap gap-2">
                 <a
                     href="#honest-reviews"
-                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-ghost hover:border-accent hover:text-accent btn-outline"
                     >Honest Reviews</a
                 >
                 <a
                     href="#shopping"
-                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-ghost hover:border-accent hover:text-accent btn-outline"
                     >Shopping</a
                 >
                 <a
                     href="#renovation"
-                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-ghost hover:border-accent hover:text-accent btn-outline"
                     >Renovation</a
                 >
                 <a
                     href="#maintenance"
-                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-ghost hover:border-accent hover:text-accent btn-outline"
                     >Maintenance</a
                 >
                 <a
                     href="#general"
-                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-ghost hover:border-accent hover:text-accent btn-outline"
                     >General</a
                 >
             </div>
-        </nav>
-        <nav class="mt-4 flex flex-wrap items-center lg:flex-nowrap">
-            <div class="flex min-w-32">
+        </nav> -->
+        <nav class="mt-4 flex flex-wrap items-start lg:flex-nowrap">
+            <div class="flex min-w-32 py-1">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1.5em"
@@ -132,12 +132,12 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                 >
                 <span>Tags</span>
             </div>
-            <div class="flex grow flex-wrap items-center text-sm">
+            <div class="flex grow flex-wrap items-center gap-2 text-base">
                 {
                     tagsList.map((tag) => (
                         <a
                             href={'/tag/' + tag}
-                            class="border-base-content/80 hover:border-accent hover:text-accent me-2 mt-1 border px-2"
+                            class="btn hover:btn-accent btn-outline h-auto rounded-full py-1"
                         >
                             {tag}
                         </a>
@@ -145,14 +145,14 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                 }
             </div>
         </nav>
-        <main class="pt-16">
+        <main class="pt-12">
             <div class="grid gap-14 lg:grid-cols-2">
                 <div class="col-span-2" id="honest-reviews">
                     <h2 class="py-2 text-4xl">
                         <a href="/honest-reviews" class="hover:text-accent">Honest Reviews</a>
                     </h2>
                     <div
-                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allHonestReviewsPosts.map((entry) => (
@@ -161,17 +161,16 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                                         <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                             {entry.data.title}
                                         </h3>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex flex-wrap items-center text-sm">
-                                            <MaterialCalendarMonthOutline class="me-1 mb-1" />
+                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 flex flex-wrap items-center text-sm">
                                             <FormattedDate date={entry.data.pubDate} />
                                         </div>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
+                                        {/* <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
                                             {entry.data.tags.map((tag) => (
                                                 <span class="border-base-content/80 border px-2">
                                                     {tag}
                                                 </span>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </a>
                                 </div>
                             ))
@@ -183,7 +182,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/shopping" class="hover:text-accent">Shopping</a>
                     </h2>
                     <div
-                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allShoppingPosts.map((entry) => (
@@ -192,17 +191,16 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                                         <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                             {entry.data.title}
                                         </h3>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex flex-wrap items-center text-sm">
-                                            <MaterialCalendarMonthOutline class="me-1 mb-1" />
+                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 flex flex-wrap items-center text-sm">
                                             <FormattedDate date={entry.data.pubDate} />
                                         </div>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
+                                        {/* <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
                                             {entry.data.tags.map((tag) => (
-                                                <span class="border-base-content/80 border px-2">
+                                                <span class="btn btn-outline h-auto rounded-full py-1">
                                                     {tag}
                                                 </span>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </a>
                                 </div>
                             ))
@@ -214,7 +212,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/renovation" class="hover:text-accent">Renovation</a>
                     </h2>
                     <div
-                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allRenovationPosts.map((entry) => (
@@ -223,17 +221,16 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                                         <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                             {entry.data.title}
                                         </h3>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex flex-wrap items-center text-sm">
-                                            <MaterialCalendarMonthOutline class="me-1 mb-1" />
+                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 flex flex-wrap items-center text-sm">
                                             <FormattedDate date={entry.data.pubDate} />
                                         </div>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
+                                        {/* <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
                                             {entry.data.tags.map((tag) => (
                                                 <span class="border-base-content/80 border px-2">
                                                     {tag}
                                                 </span>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </a>
                                 </div>
                             ))
@@ -245,7 +242,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/maintenance" class="hover:text-accent">Maintenance</a>
                     </h2>
                     <div
-                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allMaintenancePosts.map((entry) => (
@@ -254,17 +251,16 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                                         <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                             {entry.data.title}
                                         </h3>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex flex-wrap items-center text-sm">
-                                            <MaterialCalendarMonthOutline class="me-1 mb-1" />
+                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 flex flex-wrap items-center text-sm">
                                             <FormattedDate date={entry.data.pubDate} />
                                         </div>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
+                                        {/* <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
                                             {entry.data.tags.map((tag) => (
                                                 <span class="border-base-content/80 border px-2">
                                                     {tag}
                                                 </span>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </a>
                                 </div>
                             ))
@@ -276,7 +272,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/general" class="hover:text-accent">General</a>
                     </h2>
                     <div
-                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 rounded-lg border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allGeneralPosts.map((entry) => (
@@ -285,17 +281,16 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                                         <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                             {entry.data.title}
                                         </h3>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex flex-wrap items-center text-sm">
-                                            <MaterialCalendarMonthOutline class="me-1 mb-1" />
+                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 flex flex-wrap items-center text-sm">
                                             <FormattedDate date={entry.data.pubDate} />
                                         </div>
-                                        <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
+                                        {/* <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-1 flex flex-wrap items-center gap-2 text-sm">
                                             {entry.data.tags.map((tag) => (
                                                 <span class="border-base-content/80 border px-2">
                                                     {tag}
                                                 </span>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </a>
                                 </div>
                             ))
