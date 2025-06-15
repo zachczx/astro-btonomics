@@ -16,7 +16,13 @@ async function CleanAndSort() {
         entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
     })
 
-    posts.sort((a, b) => b.data.pid - a.data.pid)
+    posts.sort((a, b) => {
+        if (!a.data.pid && !b.data.pid) return 0
+        if (!a.data.pid) return 1
+        if (!b.data.pid) return -1
+
+        return a.data.pid - b.data.pid
+    })
 
     return posts
 }
@@ -36,8 +42,6 @@ const allShoppingPosts = await FilterCleanSort(allPosts, 'shopping')
 const allRenovationPosts = await FilterCleanSort(allPosts, 'renovation')
 const allMaintenancePosts = await FilterCleanSort(allPosts, 'maintenance')
 const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
-
-// GetPid();
 ---
 
 <Layout title="Home">
@@ -88,27 +92,27 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
             <div class="flex flex-wrap gap-2">
                 <a
                     href="#honest-reviews"
-                    class="btn btn-outline btn-sm border-primary text-primary hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
                     >Honest Reviews</a
                 >
                 <a
                     href="#shopping"
-                    class="btn btn-outline btn-sm border-primary text-primary hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
                     >Shopping</a
                 >
                 <a
                     href="#renovation"
-                    class="btn btn-outline btn-sm border-primary text-primary hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
                     >Renovation</a
                 >
                 <a
                     href="#maintenance"
-                    class="btn btn-outline btn-sm border-primary text-primary hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
                     >Maintenance</a
                 >
                 <a
                     href="#general"
-                    class="btn btn-outline btn-sm border-primary text-primary hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
+                    class="btn btn-outline btn-sm border-base-content hover:border-accent hover:text-accent rounded-none text-base hover:bg-transparent"
                     >General</a
                 >
             </div>
@@ -148,7 +152,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/honest-reviews" class="hover:text-accent">Honest Reviews</a>
                     </h2>
                     <div
-                        class="border-base-content grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allHonestReviewsPosts.map((entry) => (
@@ -179,7 +183,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/shopping" class="hover:text-accent">Shopping</a>
                     </h2>
                     <div
-                        class="border-base-content grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allShoppingPosts.map((entry) => (
@@ -210,7 +214,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/renovation" class="hover:text-accent">Renovation</a>
                     </h2>
                     <div
-                        class="border-base-content grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allRenovationPosts.map((entry) => (
@@ -241,7 +245,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/maintenance" class="hover:text-accent">Maintenance</a>
                     </h2>
                     <div
-                        class="border-base-content grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allMaintenancePosts.map((entry) => (
@@ -272,7 +276,7 @@ const allGeneralPosts = await FilterCleanSort(allPosts, 'general')
                         <a href="/general" class="hover:text-accent">General</a>
                     </h2>
                     <div
-                        class="border-base-content grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
+                        class="border-base-content/30 grid gap-12 border-2 p-4 hover:bg-black/30 lg:grid-cols-2 lg:p-8"
                     >
                         {
                             allGeneralPosts.map((entry) => (
