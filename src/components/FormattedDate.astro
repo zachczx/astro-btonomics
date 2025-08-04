@@ -1,36 +1,8 @@
 ---
-import MaterialCalendarMonthOutline from './svg/MaterialCalendarMonthOutline.astro'
-
-interface Props {
-    date: Date
-}
-
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 const { date } = Astro.props
-
-// TODO: Eventually try out Intl.RelativeTimeFormat
-// https://stackoverflow.com/questions/67373795/how-to-use-intl-formatrelativetime-in-the-correct-way
-const postDate = new Date(date)
-const today = new Date()
-const day = 1000 * 3600 * 24
-const differenceDays = (today.getTime() - date.getTime()) / day
-let differenceString = ''
-
-if (differenceDays < 2) {
-    differenceString = `1 day ago`
-} else if (differenceDays >= 2 && differenceDays <= 30) {
-    const cleanDifferenceDays = Math.floor(differenceDays)
-    differenceString = `${cleanDifferenceDays} days ago`
-} else if (differenceDays > 30 && differenceDays < 60) {
-    differenceString = `1 month ago`
-} else if (differenceDays >= 60 && differenceDays < 365) {
-    const differenceMonths = Math.floor(differenceDays / 30)
-    differenceString = `${differenceMonths} months ago`
-} else if (differenceDays === 365) {
-    differenceString = `1 year ago`
-} else if (differenceDays > 365) {
-    const differenceYears = Math.floor(differenceDays / 365)
-    differenceString = `${differenceYears} years ago`
-}
 ---
 
 <time datetime={date.toISOString()}>
@@ -43,6 +15,6 @@ if (differenceDays < 2) {
                 day: 'numeric',
             })}
     >
-        {differenceString}
+        {dayjs(date).fromNow()}
     </div>
 </time>
