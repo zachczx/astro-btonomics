@@ -1,7 +1,7 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
-@plugin "daisyui";
-@plugin "daisyui/theme" {
+@plugin '@tailwindcss/typography';
+@plugin 'daisyui';
+@plugin 'daisyui/theme' {
     name: 'night';
     default: true;
     --color-base-300: #020204;
@@ -15,9 +15,9 @@
     font-weight: 200 1000;
     src: url(@fontsource-variable/nunito-sans/files/nunito-sans-latin-wght-normal.woff2)
         format('woff2-variations');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-        U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
-        U+FFFD;
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+        U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* roboto-slab-latin-wght-normal */
@@ -28,9 +28,9 @@
     font-weight: 100 900;
     src: url(@fontsource-variable/roboto-slab/files/roboto-slab-latin-wght-normal.woff2)
         format('woff2-variations');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-        U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
-        U+FFFD;
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+        U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @theme {
@@ -69,5 +69,27 @@
     h3 {
         font-size: (--text-xl);
         font-weight: 700;
+    }
+}
+
+@utility text-list {
+    span:not(:last-of-type)::after {
+        content: ', ';
+    }
+}
+
+@utility text-list-dot {
+    span:not(:last-of-type)::after {
+        content: '•';
+        margin-inline-start: 0.5rem;
+        margin-inline-end: 0.5rem;
+    }
+}
+
+@utility text-list-dot {
+    span:not(:last-of-type)::after {
+        content: '/';
+        margin-inline-start: 0.25rem;
+        margin-inline-end: 0.25rem;
     }
 }

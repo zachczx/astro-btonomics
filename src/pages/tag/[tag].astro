@@ -24,7 +24,7 @@ async function CleanAndSort(category = '') {
         entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
     })
 
-    posts.sort((a, b) => b.data.pid - a.data.pid)
+    posts.sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
 
     return posts
 }
@@ -35,7 +35,9 @@ const tagsList = await GetUniqueTags(allPosts)
 // 1. Generate a new path for every collection entry
 export const getStaticPaths = (async () => {
     const blogEntriesUnsorted = await getCollection('blog')
-    const blogEntries = blogEntriesUnsorted.sort((a, b) => a.data.category - b.data.category)
+    const blogEntries = blogEntriesUnsorted.sort((a, b) =>
+        a.data.category.localeCompare(b.data.category),
+    )
     const tagsList = await GetUniqueTags(blogEntries)
 
     return tagsList.map((tag) => {
@@ -111,38 +113,22 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Honest Reviews')
-                                .sort((a, b) => b.data.pid - a.data.pid)
+                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
                                             <h3 class="title text-primary hover:text-accent group-hover:text-base-100 underline">
                                                 {entry.data.title}
                                             </h3>
-                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
-                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 flex items-center text-sm">
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
-                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="1.3em"
-                                                    height="1.3em"
-                                                    class="prime:tags me-1 inline"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        fill="currentColor"
-                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                                                    />
-                                                </svg>
-                                                {entry.data.tags.map((tag, i) => (
-                                                    <>
-                                                        {tag}
-                                                        {entry.data.tags.length - 1 !== i
-                                                            ? ', '
-                                                            : undefined}
-                                                    </>
-                                                ))}
+                                            <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 text-sm">
+                                                <span class="text-list-dot">
+                                                    {entry.data.tags?.map((tag) => (
+                                                        <span>{tag}</span>
+                                                    ))}
+                                                </span>
                                             </div>
                                         </a>
                                     </div>
@@ -166,7 +152,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Shopping')
-                                .sort((a, b) => b.data.pid - a.data.pid)
+                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
                                 .map((entry) => (
                                     <div>
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -174,30 +160,14 @@ const { tag } = Astro.params
                                                 {entry.data.title}
                                             </h3>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
-                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="1.3em"
-                                                    height="1.3em"
-                                                    class="prime:tags me-1 inline"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        fill="currentColor"
-                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                                                    />
-                                                </svg>
-                                                {entry.data.tags.map((tag, i) => (
-                                                    <>
-                                                        {tag}
-                                                        {entry.data.tags.length - 1 !== i
-                                                            ? ', '
-                                                            : undefined}
-                                                    </>
-                                                ))}
+                                                <span class="text-list-dot">
+                                                    {entry.data.tags?.map((tag) => (
+                                                        <span>{tag}</span>
+                                                    ))}
+                                                </span>
                                             </div>
                                         </a>
                                     </div>
@@ -221,7 +191,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Renovation')
-                                .sort((a, b) => b.data.pid - a.data.pid)
+                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -229,30 +199,14 @@ const { tag } = Astro.params
                                                 {entry.data.title}
                                             </h3>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
-                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="1.3em"
-                                                    height="1.3em"
-                                                    class="prime:tags me-1 inline"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        fill="currentColor"
-                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                                                    />
-                                                </svg>
-                                                {entry.data.tags.map((tag, i) => (
-                                                    <>
-                                                        {tag}
-                                                        {entry.data.tags.length - 1 !== i
-                                                            ? ', '
-                                                            : undefined}
-                                                    </>
-                                                ))}
+                                                <span class="text-list-dot">
+                                                    {entry.data.tags?.map((tag) => (
+                                                        <span>{tag}</span>
+                                                    ))}
+                                                </span>
                                             </div>
                                         </a>
                                     </div>
@@ -276,7 +230,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Maintenance')
-                                .sort((a, b) => b.data.pid - a.data.pid)
+                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -284,30 +238,14 @@ const { tag } = Astro.params
                                                 {entry.data.title}
                                             </h3>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
-                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="1.3em"
-                                                    height="1.3em"
-                                                    class="prime:tags me-1 inline"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        fill="currentColor"
-                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                                                    />
-                                                </svg>
-                                                {entry.data.tags.map((tag, i) => (
-                                                    <>
-                                                        {tag}
-                                                        {entry.data.tags.length - 1 !== i
-                                                            ? ', '
-                                                            : undefined}
-                                                    </>
-                                                ))}
+                                                <span class="text-list-dot">
+                                                    {entry.data.tags?.map((tag) => (
+                                                        <span>{tag}</span>
+                                                    ))}
+                                                </span>
                                             </div>
                                         </a>
                                     </div>
@@ -330,7 +268,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'General')
-                                .sort((a, b) => b.data.pid - a.data.pid)
+                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -338,30 +276,14 @@ const { tag } = Astro.params
                                                 {entry.data.title}
                                             </h3>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 flex items-center text-sm">
-                                                <MaterialCalendarMonthOutline class="me-2 mb-1" />
                                                 <FormattedDate date={entry.data.pubDate} />
                                             </div>
                                             <div class="stroke-base-content text-base-content/80 group-hover:text-base-100 mt-2 text-sm">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="1.3em"
-                                                    height="1.3em"
-                                                    class="prime:tags me-1 inline"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        fill="currentColor"
-                                                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                                                    />
-                                                </svg>
-                                                {entry.data.tags.map((tag, i) => (
-                                                    <>
-                                                        {tag}
-                                                        {entry.data.tags.length - 1 !== i
-                                                            ? ', '
-                                                            : undefined}
-                                                    </>
-                                                ))}
+                                                <span class="text-list-dot">
+                                                    {entry.data.tags?.map((tag) => (
+                                                        <span>{tag}</span>
+                                                    ))}
+                                                </span>
                                             </div>
                                         </a>
                                     </div>
