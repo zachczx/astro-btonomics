@@ -56,77 +56,35 @@ const { tag } = Astro.params
 
 <Layout title="Tag">
     <aside class="p-0" data-pagefind-ignore>
-        <!-- <nav class="flex flex-wrap items-center justify-start pt-8 text-base">
-            <div class="flex min-w-32">
+        <nav class="mt-4 flex">
+            <span id="current-tag" class="hidden" data-current={tag}></span>
+            <div class="flex flex-wrap items-center gap-2 text-sm">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1.5em"
                     height="1.5em"
-                    class="material-symbols:category-outline me-2 inline"
-                    viewBox="0 0 24 24"
-                    ><path
-                        fill="currentColor"
-                        d="M6.5 11L12 2l5.5 9zm11 11q-1.875 0-3.187-1.312T13 17.5t1.313-3.187T17.5 13t3.188 1.313T22 17.5t-1.312 3.188T17.5 22M3 21.5v-8h8v8zM17.5 20q1.05 0 1.775-.725T20 17.5t-.725-1.775T17.5 15t-1.775.725T15 17.5t.725 1.775T17.5 20M5 19.5h4v-4H5zM10.05 9h3.9L12 5.85zm7.45 8.5"
-                    ></path></svg
-                ><span>Category</span>
-            </div>
-
-            <a
-                href="#honest-reviews"
-                class="btn btn-outline btn-sm me-2 rounded-none border-primary text-base text-primary hover:border-accent hover:bg-transparent hover:text-accent"
-                >Honest Reviews</a
-            >
-            <a
-                href="#shopping"
-                class="btn btn-outline btn-sm m-2 rounded-none border-primary text-base text-primary hover:border-accent hover:bg-transparent hover:text-accent"
-                >Shopping</a
-            >
-            <a
-                href="#renovation"
-                class="btn btn-outline btn-sm m-2 rounded-none border-primary text-base text-primary hover:border-accent hover:bg-transparent hover:text-accent"
-                >Renovation</a
-            >
-            <a
-                href="#maintenance"
-                class="btn btn-outline btn-sm m-2 rounded-none border-primary text-base text-primary hover:border-accent hover:bg-transparent hover:text-accent"
-                >Maintenance</a
-            >
-            <a
-                href="#general"
-                class="btn btn-outline btn-sm m-2 rounded-none border-primary text-base text-primary hover:border-accent hover:bg-transparent hover:text-accent"
-                >General</a
-            >
-        </nav> -->
-        <nav class="mt-4 flex items-start">
-            <div class="flex min-w-32 py-1">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1.5em"
-                    height="1.5em"
-                    class="prime:tags me-2 inline"
+                    class="prime:tags text-primary"
                     viewBox="0 0 24 24"
                     ><path
                         fill="currentColor"
                         d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
                     ></path></svg
                 >
-                <span>Tags</span>
-            </div>
-
-            <span id="current-tag" class="hidden" data-current={tag}></span>
-            <div class="flex grow flex-wrap items-center gap-2 text-sm">
                 {
                     tagsList.map((t) => (
-                        <a href={'/tag/' + t} class="">
-                            {t === tag && (
-                                <span class="tag btn btn-accent h-auto rounded-full py-1">{t}</span>
-                            )}
-
-                            {t !== tag && (
-                                <span class="tag btn-outline btn hover:btn-accent h-auto rounded-full py-1">
-                                    {t}
-                                </span>
-                            )}
+                        <a
+                            href={'/tag/' + t}
+                            class:list={[
+                                'group relative overflow-hidden rounded-full border px-4 py-1.5 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg',
+                                t === tag
+                                    ? 'bg-accent/20 border-accent text-accent shadow-accent/30'
+                                    : 'border-primary/40 bg-primary/10 text-primary hover:border-accent hover:bg-accent/20 hover:text-accent hover:shadow-accent/30',
+                            ]}
+                        >
+                            <>
+                                <span class="tag relative z-10">{t}</span>
+                                <div class="via-accent/20 absolute inset-0 z-0 bg-linear-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                            </>
                         </a>
                     ))
                 }
