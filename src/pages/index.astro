@@ -17,56 +17,85 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
 
 <Layout title="Home">
     <aside data-pagefind-ignore>
-        <div class="-mt-10 grid grid-cols-2 justify-items-center gap-4">
-            <div class="col-span-2 pb-12 text-center md:col-span-1">
-                <a href="/renovation/our-clean-bto-home-design">
-                    <Image
-                        src={headerImage0}
-                        alt=""
-                        loading="eager"
-                        widths={[400, 700]}
-                        class="rounded-lg brightness-[0.9] saturate-50 hover:brightness-100 hover:saturate-100"
-                        sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
-                    />
+        <div class="-mt-10 grid grid-cols-2 justify-items-center gap-6">
+            <div class="group col-span-2 pb-12 text-center md:col-span-1">
+                <a
+                    href="/renovation/our-clean-bto-home-design"
+                    class="hover:shadow-primary/30 relative block overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:shadow-2xl"
+                >
+                    <div class="relative overflow-hidden">
+                        <Image
+                            src={headerImage0}
+                            alt=""
+                            loading="eager"
+                            widths={[400, 700]}
+                            class="rounded-2xl transition-all duration-500 group-hover:scale-105"
+                            sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
+                        />
+                        <div
+                            class="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40"
+                        >
+                        </div>
+                        <div class="absolute right-0 bottom-0 left-0 p-6 text-left">
+                            <p class="text-lg font-bold text-white drop-shadow-lg">
+                                Our Clean BTO Design
+                            </p>
+                        </div>
+                    </div>
                 </a>
             </div>
-            <div class="col-span-2 text-center md:col-span-1">
-                <a href="/honest-reviews/4-room-bto-design-completed-home">
-                    <Image
-                        src={headerImage}
-                        alt=""
-                        loading="eager"
-                        widths={[400, 700]}
-                        class="rounded-lg brightness-[0.9] saturate-50 hover:brightness-100 hover:saturate-100"
-                        sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
-                    />
+            <div class="group col-span-2 text-center md:col-span-1">
+                <a
+                    href="/honest-reviews/4-room-bto-design-completed-home"
+                    class="hover:shadow-accent/30 relative block overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:shadow-2xl"
+                >
+                    <div class="relative overflow-hidden">
+                        <Image
+                            src={headerImage}
+                            alt=""
+                            loading="eager"
+                            widths={[400, 700]}
+                            class="rounded-2xl transition-all duration-500 group-hover:scale-105"
+                            sizes={`(max-width: 768px) 400px, (max-width: 2400px) 700px, ${headerImage0.width}px}`}
+                        />
+                        <div
+                            class="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40"
+                        >
+                        </div>
+                        <div class="absolute right-0 bottom-0 left-0 p-6 text-left">
+                            <p class="text-lg font-bold text-white drop-shadow-lg">
+                                Completed Home Tour
+                            </p>
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
-        
+
         <nav class="mt-4 flex flex-wrap items-start lg:flex-nowrap">
-            <div class="flex min-w-32 py-1">
+            <div class="flex min-w-32 items-center py-1 text-lg font-semibold">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1.5em"
                     height="1.5em"
-                    class="prime:tags me-2 inline"
+                    class="prime:tags text-accent me-2 inline"
                     viewBox="0 0 24 24"
                     ><path
                         fill="currentColor"
                         d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
                     ></path></svg
                 >
-                <span>Tags</span>
+                <span class="text-primary">Tags</span>
             </div>
-            <div class="flex grow flex-wrap items-center gap-2 text-base">
+            <div class="flex grow flex-wrap items-center gap-2.5 text-base">
                 {
                     tagsList.map((tag) => (
                         <a
                             href={'/tag/' + tag}
-                            class="btn hover:btn-accent btn-outline h-auto rounded-full py-1"
+                            class="group border-primary/40 bg-primary/10 text-primary hover:border-accent hover:bg-accent/20 hover:text-accent hover:shadow-accent/30 relative overflow-hidden rounded-full border px-4 py-1.5 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
                         >
-                            {tag}
+                            <span class="relative z-10">{tag}</span>
+                            <div class="via-accent/20 absolute inset-0 z-0 bg-linear-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         </a>
                     ))
                 }
@@ -74,10 +103,25 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
         </nav>
         <main class="pt-12">
             <div class="grid gap-14 lg:grid-cols-2">
-                <PostList title="Honest Reviews" url="/honest-reviews" id="honest-reviews" posts={allHonestReviewsPosts} />
+                <PostList
+                    title="Honest Reviews"
+                    url="/honest-reviews"
+                    id="honest-reviews"
+                    posts={allHonestReviewsPosts}
+                />
                 <PostList title="Shopping" url="/shopping" id="shopping" posts={allShoppingPosts} />
-                <PostList title="Renovation" url="/renovation" id="renovation" posts={allRenovationPosts} />
-                <PostList title="Maintenance" url="/maintenance" id="maintenance" posts={allMaintenancePosts} />
+                <PostList
+                    title="Renovation"
+                    url="/renovation"
+                    id="renovation"
+                    posts={allRenovationPosts}
+                />
+                <PostList
+                    title="Maintenance"
+                    url="/maintenance"
+                    id="maintenance"
+                    posts={allMaintenancePosts}
+                />
                 <PostList title="General" url="/general" id="general" posts={allGeneralPosts} />
             </div>
         </main>
