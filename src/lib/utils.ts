@@ -1,9 +1,9 @@
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
 
 export async function GetPid() {
     const allPosts = await getCollection('blog')
 
-    allPosts.sort((a, b) => a.data.pid - b.data.pid)
+    allPosts.sort((a, b) => (a.data.pid || 0) - (b.data.pid || 0))
     const lastId = allPosts[allPosts.length - 1].data.pid
     console.log(lastId)
 }
@@ -13,17 +13,35 @@ export async function GetPid() {
  * @param {object} posts - gotten from getCollection()
  * @param {array} data.tags - tags for each post, optional
  */
-export async function GetUniqueTags(posts) {
-    const tagsListDuplicates = []
-    for (let i = 0; i < posts.length; i++) {
-        posts[i].data.tags.forEach((tag) => {
-            tagsListDuplicates.push(tag)
-        })
-    }
-    const set = new Set(tagsListDuplicates)
-    const tagsList = [...set]
-    tagsList.sort()
-    return tagsList
+export async function GetUniqueTags(posts: CollectionEntry<'blog'>[]) {
+    const tags = posts.flatMap((post) => post.data.tags || [])
+    return [...new Set(tags)].sort()
+}
+
+export async function CleanAndSort() {
+    const posts = await getCollection('blog')
+
+    posts.forEach((entry) => {
+        entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
+    })
+
+    posts.sort((a, b) => {
+        if (!a.data.pid && !b.data.pid) return 0
+        if (!a.data.pid) return 1
+        if (!b.data.pid) return -1
+
+        return a.data.pid - b.data.pid
+    })
+
+    return posts
+}
+
+export function FilterCleanSort(collection: CollectionEntry<'blog'>[], filter: string) {
+    const posts = collection.filter((entry) => {
+        return entry.data.category === filter
+    })
+    posts.sort((a, b) => (b.data.pid || 0) - (a.data.pid || 0))
+    return posts
 }
 
 /**
