@@ -100,7 +100,7 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
             <div class="mt-2 flex grow justify-center">
                 <button
                     id="tags-toggle-btn"
-                    class="text-primary hover:text-accent group mt-2 flex hidden cursor-pointer items-center justify-center gap-1 text-sm font-medium transition-colors focus:outline-hidden"
+                    class="text-primary hover:text-accent group mt-2 flex cursor-pointer items-center justify-center gap-1 text-sm font-medium transition-colors focus:outline-hidden"
                     aria-expanded="false"
                 >
                     <span class="group-aria-expanded:hidden">Show more</span>
@@ -131,10 +131,12 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
                             return
                         }
 
-                        if (container.scrollHeight > container.clientHeight) {
-                            btn.classList.remove('hidden')
-                        } else {
+                        if (container.scrollHeight <= container.clientHeight) {
                             btn.classList.add('hidden')
+                            btn.classList.remove('flex')
+                        } else {
+                            btn.classList.add('flex')
+                            btn.classList.remove('hidden')
                         }
                     }
 
