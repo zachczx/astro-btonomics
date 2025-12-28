@@ -28,7 +28,7 @@ const { title, url, id, posts } = Astro.props
                         href={'/' + entry.data.category + '/' + (entry.data.slug || entry.id)}
                         class="block"
                     >
-                        <div class="bg-base-100/30 hover:bg-base-100/50 space-y-2 rounded-xl p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                        <div class="bg-base-100/30 space-y-2 rounded-xl p-4 backdrop-blur-sm transition-all duration-300">
                             <h3 class="text-primary group-hover:text-accent text-lg leading-tight font-semibold transition-colors duration-300">
                                 {entry.data.title}
                             </h3>
