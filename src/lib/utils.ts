@@ -18,12 +18,26 @@ export async function GetUniqueTags(posts: CollectionEntry<'blog'>[]) {
     return [...new Set(tags)].sort()
 }
 
+import { categories } from '../data/categories'
+
+export function getCategorySlug(categoryName: string): string {
+    // 1. Try to find strict match in defined categories
+    const found = categories.find(
+        (c) => c.name.toLowerCase() === categoryName.toLowerCase() || c.slug === categoryName.toLowerCase(),
+    )
+    if (found) return found.slug
+
+    // 2. Fallback to legacy kebab-case
+    return categoryName.toLowerCase().replace(' ', '-')
+}
+
 export async function CleanAndSort() {
     const posts = await getCollection('blog')
 
     posts.forEach((entry) => {
-        entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
+        entry.data.category = getCategorySlug(entry.data.category)
     })
+
 
     posts.sort((a, b) => {
         if (!a.data.pid && !b.data.pid) return 0
