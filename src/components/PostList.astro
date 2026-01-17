@@ -13,9 +13,7 @@ const { title, url, id, posts } = Astro.props
 ---
 
 <div class="col-span-2" id={id}>
-    <h2
-        class="from-primary via-accent to-primary bg-linear-to-r bg-clip-text py-2 text-4xl font-bold text-transparent transition-opacity duration-300 hover:opacity-80"
-    >
+    <h2 class="text-primary hover:text-accent py-2 text-4xl font-bold">
         <a href={url}>{title}</a>
     </h2>
     <div
@@ -28,8 +26,8 @@ const { title, url, id, posts } = Astro.props
                         href={'/' + entry.data.category + '/' + (entry.data.slug || entry.id)}
                         class="block"
                     >
-                        <div class="bg-base-100/30 space-y-2 rounded-xl p-4 backdrop-blur-sm transition-all duration-300">
-                            <h3 class="text-primary group-hover:text-accent text-lg leading-tight font-semibold transition-colors duration-300">
+                        <div class="space-y-2 rounded-xl p-4">
+                            <h3 class="text-primary group-hover:text-accent text-lg leading-tight font-semibold underline transition-colors duration-300">
                                 {entry.data.title}
                             </h3>
                             <div class="text-base-content/70 group-hover:text-base-content/90 flex items-center text-sm transition-colors duration-300">

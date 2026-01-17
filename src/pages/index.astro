@@ -22,7 +22,7 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
                 href="/renovation/our-clean-bto-home-design"
                 class="relative block overflow-hidden transition-all duration-500"
             >
-                <div class="relative h-[50vh] overflow-hidden">
+                <div class="relative h-75 overflow-hidden">
                     <Image
                         src={headerImage0}
                         alt=""
@@ -46,7 +46,7 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
                 href="/honest-reviews/4-room-bto-design-completed-home"
                 class="relative block overflow-hidden transition-all duration-500"
             >
-                <div class="relative h-[50vh] overflow-hidden">
+                <div class="relative h-75 overflow-hidden">
                     <Image
                         src={headerImage}
                         alt=""
@@ -89,10 +89,9 @@ const allGeneralPosts = FilterCleanSort(allPosts, 'general')
                     tagsList.map((tag) => (
                         <a
                             href={'/tag/' + tag}
-                            class="group border-primary/40 bg-primary/10 text-primary hover:border-accent hover:bg-accent/20 hover:text-accent hover:shadow-accent/30 relative overflow-hidden rounded-full border px-4 py-1.5 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                            class="group border-primary/40 bg-primary/10 text-primary hover:bg-primary-20 hover:border-primary hover:shadow-accent/70 relative overflow-hidden rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300 hover:shadow hover:shadow-md"
                         >
-                            <span class="relative z-10">{tag}</span>
-                            <div class="via-accent/20 absolute inset-0 z-0 bg-linear-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                            {tag}
                         </a>
                     ))
                 }

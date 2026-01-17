@@ -2,9 +2,56 @@
 @plugin '@tailwindcss/typography';
 @plugin 'daisyui';
 @plugin 'daisyui/theme' {
-    name: 'night';
+    name: 'hometheme';
     default: true;
-    --color-base-300: #020204;
+
+    /* --- BRAND COLORS ---
+       Cohesive earthy palette: Sage Green, Terracotta, Warm Neutrals
+    */
+
+    /* Primary: Darkened Sage Green */
+    --color-primary: #6b7e56;
+    --color-primary-content: #ffffff;
+
+    /* Secondary: Terracotta */
+    --color-secondary: #d1855c;
+    --color-secondary-content: #2a1710;
+
+    /* Accent: Warm Olive-Gray (instead of cool blue-gray) */
+    --color-accent: #7a6f5d;
+    --color-accent-content: #fdfcfa;
+
+    /* Neutral: Warm Dark Gray */
+    --color-neutral: #3a3632;
+    --color-neutral-content: #fdfcfa;
+
+    /* --- BACKGROUNDS --- */
+    /* Brightened slightly for more airiness */
+    --color-base-100: #fffffe;
+    --color-base-200: #f8f6f3;
+    --color-base-300: #ebe8e3;
+
+    /* --- BODY TEXT --- */
+    /* Warm charcoal instead of cool blue-gray */
+    --color-base-content: #3a3632; /* Ratio: 12.5:1 (Passes AAA) */
+
+    /* --- STATUS COLORS --- */
+
+    /* Info: Muted teal (warmer than original blue) */
+    --color-info: #5d8a7f;
+    --color-info-content: #fdfcfa;
+
+    /* Success: Your sage green (maintains consistency) */
+    --color-success: #6b7e56;
+    --color-success-content: #ffffff;
+
+    /* Warning: Warm amber */
+    --color-warning: #d4a255;
+    --color-warning-content: #251a0e;
+
+    /* Error: Terracotta-adjacent rust */
+    --color-error: #c25a3a;
+    --color-error-content: #fdf5f2;
 }
 
 /* nunito-sans-latin-wght-normal */
