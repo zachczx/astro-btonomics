@@ -1,10 +1,10 @@
 ---
-import Search from 'astro-pagefind/components/Search';
-import Layout from '../layouts/Layout.astro';
+import PagefindSearch from 'astro-pagefind/components/Search'
+import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Search">
-    <Search
+    <PagefindSearch
         id="search"
         className="pagefind-ui w-full"
         uiOptions={{ showImages: false, autofocus: true }}
@@ -14,10 +14,10 @@ import Layout from '../layouts/Layout.astro';
 <style is:global>
     .pagefind-ui {
         --pagefind-ui-scale: 1;
-        --pagefind-ui-primary: #38bdf8;
-        --pagefind-ui-text: #d6d6d6;
-        --pagefind-ui-background: #0f172a;
-        --pagefind-ui-border: #d6d6d6;
+        --pagefind-ui-primary: var(--color-primary);
+        --pagefind-ui-text: var(--color-base-content);
+        --pagefind-ui-background: none;
+        --pagefind-ui-border: var(--color-neutral);
         --pagefind-ui-tag: #eeeeee;
         --pagefind-ui-border-width: 2px;
         --pagefind-ui-border-radius: 8px;
@@ -38,7 +38,12 @@ import Layout from '../layouts/Layout.astro';
 
     .pagefind-ui__result-link,
     .pagefind-ui__result-title {
-        color: #38bdf8 !important;
+        color: var(--color-primary) !important;
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--color-accent) !important;
+        }
     }
 
     .pagefind-ui__button {
