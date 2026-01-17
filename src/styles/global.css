@@ -54,36 +54,11 @@
     --color-error-content: #fdf5f2;
 }
 
-/* nunito-sans-latin-wght-normal */
-@font-face {
-    font-family: 'Nunito Sans Variable';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 200 1000;
-    src: url(@fontsource-variable/nunito-sans/files/nunito-sans-latin-wght-normal.woff2)
-        format('woff2-variations');
-    unicode-range:
-        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
-        U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* roboto-slab-latin-wght-normal */
-@font-face {
-    font-family: 'Roboto Slab Variable';
-    font-style: normal;
-    font-display: swap;
-    font-weight: 100 900;
-    src: url(@fontsource-variable/roboto-slab/files/roboto-slab-latin-wght-normal.woff2)
-        format('woff2-variations');
-    unicode-range:
-        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
-        U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 @theme {
-    --font-*: initial;
-    --font-sans: Nunito Sans;
-    --font-serif: Roboto Slab Variable;
+    --font-mono: 'Courier Prime', monospace;
+    --font-sans: 'Nunito Sans', sans-serif;
+    --font-serif: 'Playfair Display Variable', serif;
+    --font-body: 'Lora Variable', serif;
 }
 
 @layer base {
@@ -94,17 +69,107 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
+    /* nunito-sans-latin-wght-normal */
+    @font-face {
+        font-family: 'Nunito Sans Variable';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 200 1000;
+        src: url(@fontsource-variable/nunito-sans/files/nunito-sans-latin-wght-normal.woff2)
+            format('woff2-variations');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+            U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+            U+FFFD;
+    }
+
+    /* playfair-display-latin-wght-normal */
+    @font-face {
+        font-family: 'Playfair Display Variable';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400 900;
+        src: url(@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2)
+            format('woff2-variations');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+            U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* lora-latin-wght-normal */
+    @font-face {
+        font-family: 'Lora Variable';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400 700;
+        src: url(@fontsource-variable/lora/files/lora-latin-wght-normal.woff2)
+            format('woff2-variations');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+            U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* roboto-slab-latin-wght-normal */
+    @font-face {
+        font-family: 'Roboto Slab Variable';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 100 900;
+        src: url(@fontsource-variable/roboto-slab/files/roboto-slab-latin-wght-normal.woff2)
+            format('woff2-variations');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+            U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+            U+FFFD;
+    }
+
+    /* roboto-mono-latin-wght-normal */
+    @font-face {
+        font-family: 'Roboto Mono Variable';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 100 700;
+        src: url(@fontsource-variable/roboto-mono/files/roboto-mono-latin-wght-normal.woff2)
+            format('woff2-variations');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+            U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    /* courier-prime-latin-400-normal */
+    @font-face {
+        font-family: 'Courier Prime';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src:
+            url(@fontsource/courier-prime/files/courier-prime-latin-400-normal.woff2)
+                format('woff2'),
+            url(@fontsource/courier-prime/files/courier-prime-latin-400-normal.woff) format('woff');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+            U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
 }
 
 @layer utilities {
     :root {
-        font-family: 'Nunito Sans Variable', sans-serif;
         /* Reserve space for scrollbar to prevent layout jumping */
         scrollbar-gutter: stable;
     }
 }
 
 @layer base {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-serif);
+    }
+
     h1 {
         font-size: (--text-4xl);
         font-weight: 900;
