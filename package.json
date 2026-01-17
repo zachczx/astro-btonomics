@@ -1,7 +1,7 @@
 {
     "name": "astro-blog",
     "type": "module",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
@@ -14,8 +14,12 @@
         "@astrojs/check": "^0.9.6",
         "@astrojs/mdx": "^4.3.13",
         "@astrojs/sitemap": "^3.7.0",
+        "@fontsource-variable/lora": "^5.2.8",
         "@fontsource-variable/nunito-sans": "^5.2.7",
+        "@fontsource-variable/playfair-display": "^5.2.8",
+        "@fontsource-variable/roboto-mono": "^5.2.8",
         "@fontsource-variable/roboto-slab": "^5.2.8",
+        "@fontsource/courier-prime": "^5.2.8",
         "@tailwindcss/vite": "^4.1.18",
         "astro": "^5.16.11",
         "astro-pagefind": "^1.8.5",
@@ -25,6 +29,7 @@
         "typescript": "^5.9.3"
     },
     "devDependencies": {
+        "@iconify/json": "^2.2.429",
         "@tailwindcss/typography": "^0.5.19",
         "@typescript-eslint/parser": "^8.53.0",
         "daisyui": "^5.5.14",
@@ -33,6 +38,7 @@
         "eslint-plugin-astro": "^1.5.0",
         "prettier": "^3.8.0",
         "prettier-plugin-astro": "^0.14.1",
-        "prettier-plugin-tailwindcss": "^0.7.2"
+        "prettier-plugin-tailwindcss": "^0.7.2",
+        "unplugin-icons": "^23.0.1"
     }
 }
