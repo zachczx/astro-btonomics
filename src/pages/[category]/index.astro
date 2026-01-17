@@ -1,60 +1,77 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
-import MaterialCalendarMonthOutline from '../../components/svg/MaterialCalendarMonthOutline.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
+import { categories } from '../../data/categories'
+import { getCategorySlug } from '../../lib/utils'
 
-function StringtoParam(string: string) {
-    return string.toLowerCase().replace(' ', '-')
-}
+// Legacy categories (keep these to prevent 404s for old links if needed)
+const legacyCategories = ['shopping', 'honest-reviews', 'general', 'renovation', 'maintenance']
 
 export async function getStaticPaths() {
-    return [
+    // Import categories dynamically if needed, but here we can just use the import
+    const { categories } = await import('../../data/categories')
+
+    const newPaths = categories.map((c) => ({ params: { category: c.slug } }))
+    const oldPaths = [
         { params: { category: 'shopping' } },
         { params: { category: 'honest-reviews' } },
         { params: { category: 'general' } },
         { params: { category: 'renovation' } },
         { params: { category: 'maintenance' } },
     ]
+
+    return [...newPaths, ...oldPaths]
 }
 
 const { category } = Astro.params
+const matchedCategory = categories.find((c) => c.slug === category)
+
+function StringtoParam(string: string) {
+    return string.toLowerCase().replace(' ', '-')
+}
+
 const posts = await getCollection('blog', ({ data }) => {
+    // 1. If it matches a new Category Definition, filter by TAGS
+    if (matchedCategory) {
+        const catTags = matchedCategory.tags.map((t) => t.toLowerCase())
+        const postTags = (data.tags || []).map((t) => t.toLowerCase())
+        return postTags.some((t) => catTags.includes(t))
+    }
+
+    // 2. Fallback to Legacy generic category match
     return StringtoParam(data.category) === category
 })
 
+// Sort posts
 posts.forEach(
     (entry) => (entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')),
 )
 posts.sort((a, b) => {
-    /**
-     * A negative value indicates that a should come before b.
-     * A positive value indicates that a should come after b.
-     * Zero or NaN indicates that a and b are considered equal.
-     * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-     */
-    if (!a.data.pid && !b.data.pid) return 0
-    if (!a.data.pid) return 1
-    if (!b.data.pid) return -1
-
-    return a.data.pid - b.data.pid
+    if (a.data.pubDate && b.data.pubDate) {
+        return b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    }
+    return (b.data.pid || 0) - (a.data.pid || 0)
 })
 
-let cleanCategory
-if (category === 'honest-reviews') {
-    cleanCategory = 'Honest Reviews'
-} else if (category === 'shopping') {
-    cleanCategory = 'Shopping'
-} else if (category === 'general') {
-    cleanCategory = 'General'
-} else if (category === 'maintenance') {
-    cleanCategory = 'Maintenance'
-} else if (category === 'renovation') {
-    cleanCategory = 'Renovation'
+let pageTitle = ''
+let pageDesc = ''
+
+if (matchedCategory) {
+    pageTitle = matchedCategory.name
+    pageDesc = matchedCategory.description
+} else {
+    // Legacy Title Logic
+    if (category === 'honest-reviews') pageTitle = 'Honest Reviews'
+    else if (category === 'shopping') pageTitle = 'Shopping'
+    else if (category === 'general') pageTitle = 'General'
+    else if (category === 'maintenance') pageTitle = 'Maintenance'
+    else if (category === 'renovation') pageTitle = 'Renovation'
+    pageDesc = `Browse all ${pageTitle.toLowerCase()} articles`
 }
 ---
 
-<Layout title={cleanCategory}>
+<Layout title={pageTitle}>
     <div class="mb-14" data-pagefind-ignore>
         <!-- Category Header -->
         <div class="mb-8">
@@ -63,53 +80,62 @@ if (category === 'honest-reviews') {
                     >Home</a
                 >
                 <span class="text-base-content/50 mx-2">/</span>
-                <span class="capitalize">{cleanCategory}</span>
+                <span class="capitalize">{pageTitle}</span>
             </nav>
             <h1
                 class="from-primary via-accent to-primary bg-linear-to-r bg-clip-text py-2 text-5xl font-bold text-transparent md:text-6xl"
             >
-                {cleanCategory}
+                {pageTitle}
             </h1>
             <p class="text-base-content/70 mt-2">
-                Browse all {cleanCategory?.toLowerCase()} articles
+                {pageDesc}
             </p>
         </div>
 
         <!-- Posts Grid -->
         <div
-            class="border-base-content/20 from-base-100/40 to-base-100/20 relative grid gap-6 rounded-2xl border bg-linear-to-br py-6 shadow-xl backdrop-blur-sm md:grid-cols-2 md:gap-8 md:p-10"
+            class="border-base-content/20 bg-base-100 relative grid gap-6 rounded-2xl border py-6 shadow-xl backdrop-blur-sm md:grid-cols-2 md:gap-8 md:p-10"
         >
             {
-                posts.map((entry) => (
-                    <div class="group relative">
-                        <a href={entry.data.category + '/' + entry.data.slug} class="block">
-                            <div class="bg-base-100/30 hover:bg-base-100/50 space-y-2 rounded-xl p-4 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                                <h3 class="text-primary group-hover:text-accent text-lg leading-tight font-semibold transition-colors duration-300">
-                                    {entry.data.title}
-                                </h3>
-                                <div class="text-base-content/70 group-hover:text-base-content/90 flex items-center text-sm transition-colors duration-300">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="1em"
-                                        height="1em"
-                                        viewBox="0 0 24 24"
-                                        class="mr-1.5 opacity-70"
-                                    >
-                                        <path
-                                            fill="currentColor"
-                                            d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"
-                                        />
-                                        <path
-                                            fill="currentColor"
-                                            d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2M19 8l.001 12H5V8z"
-                                        />
-                                    </svg>
-                                    <FormattedDate date={entry.data.pubDate} />
+                posts.length > 0 ? (
+                    posts.map((entry) => (
+                        <div class="group relative">
+                            <a
+                                href={`/${getCategorySlug(entry.data.category)}/${entry.data.slug}`}
+                                class="block"
+                            >
+                                <div class="space-y-2 rounded-xl p-4">
+                                    <h3 class="text-primary hover:text-accent text-lg leading-tight font-semibold underline transition-colors duration-300">
+                                        {entry.data.title}
+                                    </h3>
+                                    <div class="text-base-content/70 group-hover:text-base-content/90 flex items-center text-sm transition-colors duration-300">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="1em"
+                                            height="1em"
+                                            viewBox="0 0 24 24"
+                                            class="mr-1.5 opacity-70"
+                                        >
+                                            <path
+                                                fill="currentColor"
+                                                d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"
+                                            />
+                                            <path
+                                                fill="currentColor"
+                                                d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2M19 8l.001 12H5V8z"
+                                            />
+                                        </svg>
+                                        <FormattedDate date={entry.data.pubDate} />
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+                    ))
+                ) : (
+                    <div class="text-base-content/50 col-span-2 py-10 text-center">
+                        No posts found in this category.
                     </div>
-                ))
+                )
             }
         </div>
     </div>

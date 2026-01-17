@@ -3,13 +3,15 @@ import Layout from '../../layouts/Layout.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
 import { getCollection, render } from 'astro:content'
 import Prose from '../../components/Prose.astro'
+import { getCategorySlug } from '../../lib/utils'
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
     const blogEntries = await getCollection('blog')
+    
     return blogEntries.map((entry) => ({
         params: {
-            category: entry.data.category.toLowerCase().replace(' ', '-'),
+            category: getCategorySlug(entry.data.category),
             id: entry.data.slug,
         },
         props: { entry },
@@ -30,7 +32,7 @@ const { Content } = await render(entry)
                 >
                 <span class="text-base-content/50 mx-2">/</span>
                 <a
-                    href={`/${entry.data.category.toLowerCase().replace(' ', '-')}`}
+                    href={`/${getCategorySlug(entry.data.category)}`}
                     class="text-primary hover:text-accent capitalize transition-colors duration-200"
                 >
                     {entry.data.category}

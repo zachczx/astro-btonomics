@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import PostList from '../components/PostList.astro'
+import { CleanAndSort } from '../lib/utils'
+
+const allPosts = await CleanAndSort()
+---
+
+<Layout title="Blog">
+    <div class="mt-8">
+        <h1 class="text-4xl font-bold mb-8 text-center text-primary">All Blog Posts</h1>
+        <PostList posts={allPosts} title="Latest Articles" url="" id="all-posts" />
+    </div>
+</Layout>
