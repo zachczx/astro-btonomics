@@ -1,6 +1,7 @@
 // 1. Import utilities from `astro:content`
 import { z, defineCollection } from 'astro:content'
 import { glob } from 'astro/loaders'
+import { fileURLToPath } from 'node:url'
 
 // 2. Define your collection(s)
 const blog = defineCollection({

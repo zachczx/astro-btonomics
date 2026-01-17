@@ -14,8 +14,6 @@ const allPosts = await CleanAndSort()
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
 const latestPosts = allPosts.slice(1, 7)
-const heroLeft = allPosts[0]
-const heroRight = allPosts[1]
 
 const categoryCounts: Record<string, number> = {}
 categories.forEach((cat) => {
@@ -35,7 +33,7 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
         <div class="container mx-auto px-4">
             <div class="mx-auto grid max-w-5xl grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
                 <a
-                    href={`/${heroLeft.data.category}/${heroLeft.data.slug}`}
+                    href={`/renovation/our-clean-bto-home-design`}
                     class="group block transition-all duration-500 hover:scale-105"
                 >
                     <div class="bg-white p-6 shadow-md transition-shadow duration-500">
@@ -70,7 +68,7 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
                 </a>
 
                 <a
-                    href={`/${heroRight.data.category}/${heroRight.data.slug}`}
+                    href={`/renovation/our-clean-bto-home-design`}
                     class="group block transition-all duration-500 hover:scale-105"
                 >
                     <div class="bg-white p-6 shadow-md transition-shadow duration-500">
