@@ -1,205 +1,229 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { Image } from 'astro:assets'
-import headerImage from '../images/36_upload_IMG_20180730_204953_header.jpg'
-import headerImage0 from '../images/3_concept1_header-topaz-enhance-4x.webp'
-import { GetUniqueTags, CleanAndSort, FilterCleanSort } from '../lib/utils'
-import PostList from '../components/PostList.astro'
+import { CleanAndSort } from '../lib/utils'
+import headerImage2 from '../images/36_upload_IMG_20180730_204953_header.jpg'
+import headerImage1 from '../images/3_concept1_header-topaz-enhance-4x.webp'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import { categories } from '../data/categories'
+
+dayjs.extend(relativeTime)
 
 const allPosts = await CleanAndSort()
-const tagsList = await GetUniqueTags(allPosts)
-const allHonestReviewsPosts = FilterCleanSort(allPosts, 'honest-reviews')
-const allShoppingPosts = FilterCleanSort(allPosts, 'shopping')
-const allRenovationPosts = FilterCleanSort(allPosts, 'renovation')
-const allMaintenancePosts = FilterCleanSort(allPosts, 'maintenance')
-const allGeneralPosts = FilterCleanSort(allPosts, 'general')
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
+const latestPosts = allPosts.slice(1, 7)
+const heroLeft = allPosts[0]
+const heroRight = allPosts[1]
+
+const categoryCounts: Record<string, number> = {}
+categories.forEach((cat) => {
+    const catTags = cat.tags.map((t) => t.toLowerCase())
+    const count = allPosts.filter((post) => {
+        const postTags = (post.data.tags || []).map((t) => t.toLowerCase())
+        return postTags.some((t) => catTags.includes(t))
+    }).length
+    categoryCounts[cat.slug] = count
+})
+
+const formatDate = (date: Date) => dayjs(date).fromNow()
 ---
 
 <Layout title="Home">
-    <div slot="hero" class="mt-4 grid w-full grid-cols-2 lg:mt-10" data-pagefind-ignore>
-        <div class="group col-span-2 text-center md:col-span-1">
-            <a
-                href="/renovation/our-clean-bto-home-design"
-                class="relative block overflow-hidden transition-all duration-500"
-            >
-                <div class="relative h-75 overflow-hidden">
-                    <Image
-                        src={headerImage0}
-                        alt=""
-                        loading="eager"
-                        widths={[600, 1200, 2000]}
-                        class="h-full w-full object-cover object-center opacity-75 transition-all duration-500 group-hover:scale-105"
-                        sizes={`(max-width: 768px) 100vw, 50vw`}
-                    />
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40"
-                    >
+    <div slot="hero" class="bg-base-200/50 py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="mx-auto grid max-w-5xl grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
+                <a
+                    href={`/${heroLeft.data.category}/${heroLeft.data.slug}`}
+                    class="group block transition-all duration-500 hover:scale-105"
+                >
+                    <div class="bg-white p-6 shadow-md transition-shadow duration-500">
+                        <div class="bg-base-200 relative mb-6 aspect-4/3 overflow-hidden">
+                            <Image
+                                src={headerImage1}
+                                alt="The start"
+                                width={960}
+                                height={720}
+                                class="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
+                                loading="eager"
+                            />
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="text-base-content inline-block rounded-full bg-white/90 px-3 py-1 text-xs font-bold tracking-wider uppercase shadow-md"
+                                >
+                                    The Journey
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h2
+                                class="text-base-content group-hover:text-primary mb-3 text-3xl font-bold transition-colors"
+                            >
+                                The Design
+                            </h2>
+                            <p class="text-base-content/70 text-sm leading-relaxed">
+                                Planning, decisions, and lessons learned
+                            </p>
+                        </div>
                     </div>
-                    <div class="absolute right-0 bottom-0 left-0 p-6 text-left">
-                        <p class="text-lg font-bold text-white drop-shadow-lg">The Design</p>
+                </a>
+
+                <a
+                    href={`/${heroRight.data.category}/${heroRight.data.slug}`}
+                    class="group block transition-all duration-500 hover:scale-105"
+                >
+                    <div class="bg-white p-6 shadow-md transition-shadow duration-500">
+                        <div class="bg-base-200 relative mb-6 aspect-4/3 overflow-hidden">
+                            <Image
+                                src={headerImage2}
+                                alt="The end"
+                                width={960}
+                                height={720}
+                                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                loading="eager"
+                            />
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="bg-primary inline-block rounded-full px-3 py-1 text-xs font-bold tracking-wider text-white uppercase shadow-md"
+                                >
+                                    The Outcome
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h2
+                                class="text-base-content group-hover:text-primary mb-3 text-3xl font-bold transition-colors"
+                            >
+                                The Result
+                            </h2>
+                            <p class="text-base-content/70 text-sm leading-relaxed">
+                                Real transformations and honest reviews
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="group col-span-2 text-center md:col-span-1">
-            <a
-                href="/honest-reviews/4-room-bto-design-completed-home"
-                class="relative block overflow-hidden transition-all duration-500"
-            >
-                <div class="relative h-75 overflow-hidden">
-                    <Image
-                        src={headerImage}
-                        alt=""
-                        loading="eager"
-                        widths={[600, 1200, 2000]}
-                        class="h-full w-full object-cover object-center opacity-75 transition-all duration-500 group-hover:scale-105"
-                        sizes={`(max-width: 768px) 100vw, 50vw`}
-                    />
-                    <div
-                        class="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40"
-                    >
-                    </div>
-                    <div class="absolute right-0 bottom-0 left-0 p-6 text-left">
-                        <p class="text-lg font-bold text-white drop-shadow-lg">The Result</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 
-    <aside data-pagefind-ignore>
-        <nav class="mt-4 grid">
-            <div
-                id="tags-container"
-                class="flex flex-wrap items-center gap-2.5 overflow-hidden py-2 text-base transition-[max-height] duration-500 ease-in-out"
-                style="max-height: 6.0rem"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1.5em"
-                    height="1.5em"
-                    class="prime:tags text-primary"
-                    viewBox="0 0 24 24"
-                    ><path
-                        fill="currentColor"
-                        d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                    ></path></svg
+    <main class="bg-base-200/30 space-y-20 py-12 md:py-16">
+        <section class="container mx-auto px-4">
+            <div class="mb-12 flex items-end justify-between md:mb-16">
+                <div>
+                    <h2 class="text-base-content mb-1 text-3xl font-bold md:text-4xl">
+                        Latest Happenings
+                    </h2>
+                </div>
+                <a
+                    href="/blog"
+                    class="text-primary hover:text-secondary flex items-center gap-1 text-sm font-bold transition-colors"
                 >
-                {
-                    tagsList.map((tag) => (
-                        <a
-                            href={'/tag/' + tag}
-                            class="group border-primary/40 bg-primary/10 text-primary hover:bg-primary-20 hover:border-primary hover:shadow-accent/70 relative overflow-hidden rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-300 hover:shadow hover:shadow-md"
-                        >
-                            {tag}
-                        </a>
-                    ))
-                }
-            </div>
-            <div class="mt-2 flex grow justify-center">
-                <button
-                    id="tags-toggle-btn"
-                    class="text-primary hover:text-accent group mt-2 hidden cursor-pointer items-center justify-center gap-1 text-sm font-medium transition-colors focus:outline-hidden"
-                    aria-expanded="false"
-                    data-initialized=""
-                >
-                    <span class="group-aria-expanded:hidden">Show more</span>
-                    <span class="hidden group-aria-expanded:block">Show less</span>
+                    See All
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
+                        class="h-4 w-4"
+                        viewBox="0 0 20 20"
                         fill="currentColor"
-                        class="size-5 transition-transform duration-300 group-aria-expanded:rotate-180"
                     >
                         <path
-                            d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
-                        ></path>
+                            fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
                     </svg>
-                </button>
+                </a>
             </div>
 
-            <script>
-                function initTagsToggle() {
-                    const container = document.getElementById('tags-container')
-                    const btn = document.getElementById('tags-toggle-btn')
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                {
+                    latestPosts.map((post, index) => {
+                        const badgeColors = ['badge-primary', 'badge-secondary', 'badge-accent']
+                        const badgeColor = badgeColors[index % 3]
 
-                    if (container && btn && !btn.dataset.initialized) {
-                        btn.dataset.initialized = 'true'
+                        return (
+                            <article
+                                class={`group transition-all duration-500 hover:scale-102 hover:rotate-[0.5deg]`}
+                            >
+                                <a href={`/${post.data.category}/${post.data.slug}`} class="block">
+                                    <div class="bg-white p-4 shadow transition-shadow duration-500 hover:shadow-md">
+                                        <div class="bg-base-200 relative mb-4 aspect-square overflow-hidden">
+                                            {post.data.image && (
+                                                <Image
+                                                    src={post.data.image.url}
+                                                    alt={post.data.image.alt || post.data.title}
+                                                    width={600}
+                                                    height={600}
+                                                    class="h-full w-full object-cover"
+                                                />
+                                            )}
+                                            <div class="absolute top-2 right-2">
+                                                <span
+                                                    class={`badge ${badgeColor} badge-sm font-semibold shadow-md`}
+                                                >
+                                                    {post.data.tags?.[0] || 'Post'}
+                                                </span>
+                                            </div>
+                                        </div>
 
-                        const checkOverflow = () => {
-                            container.style.transition = 'none'
-                            container.style.maxHeight = '6rem'
-                            btn.setAttribute('aria-expanded', 'false')
+                                        <div class="text-center">
+                                            <h3 class="group-hover:text-primary mb-2 line-clamp-2 text-lg leading-tight font-bold transition-colors">
+                                                {post.data.title}
+                                            </h3>
+                                            <time class="text-base-content/60 block text-xs">
+                                                {formatDate(post.data.pubDate)}
+                                            </time>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                        )
+                    })
+                }
+            </div>
+        </section>
 
-                            void container.offsetHeight
+        <section class="bg-base-200/30 py-20">
+            <div class="container mx-auto px-4">
+                <div class="mb-16 text-center">
+                    <h2 class="text-base-content text-4xl font-bold md:text-5xl">
+                        Browse by Topic
+                    </h2>
+                </div>
 
-                            if (container.scrollHeight > container.clientHeight) {
-                                btn.classList.add('flex')
-                                btn.classList.remove('hidden')
-                            } else {
-                                btn.classList.add('hidden')
-                                btn.classList.remove('flex')
-                            }
+                <div
+                    class="mx-auto grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3"
+                >
+                    {
+                        categories.map((cat) => {
+                            return (
+                                <a href={`/${cat.slug}`} class={`group block`}>
+                                    <div class="rounded-2xl bg-white p-6 shadow-md">
+                                        <div class="flex flex-col items-center text-center">
+                                            <div class="mb-6 flex w-full items-center justify-center rounded-2xl transition-colors">
+                                                <div class="text-primary text-7xl">
+                                                    <cat.icon />
+                                                </div>
+                                            </div>
 
-                            container.style.transition = ''
-                        }
+                                            <h3 class="text-base-content group-hover:text-primary mb-2 text-xl font-bold transition-colors">
+                                                {cat.name}
+                                            </h3>
 
-                        checkOverflow()
-                        window.addEventListener('resize', checkOverflow)
+                                            <span class="bg-primary/15 text-primary mb-3 inline-block rounded-full px-3 py-1 text-xs font-bold">
+                                                {categoryCounts[cat.slug]} posts
+                                            </span>
 
-                        btn.addEventListener('click', () => {
-                            const isExpanded = btn.getAttribute('aria-expanded') === 'true'
-                            if (!isExpanded) {
-                                container.style.maxHeight = container.scrollHeight + 'px'
-                                btn.setAttribute('aria-expanded', 'true')
-                            } else {
-                                container.style.maxHeight = '6rem'
-                                btn.setAttribute('aria-expanded', 'false')
-                            }
+                                            <p class="text-base-content/80 text-xs leading-relaxed">
+                                                {cat.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            )
                         })
                     }
-                }
-
-                initTagsToggle()
-
-                document.addEventListener('astro:page-load', () => {
-                    initTagsToggle()
-                })
-            </script>
-        </nav>
-    </aside>
-    <main class="pt-12">
-        <div class="grid gap-14 lg:grid-cols-2">
-            <PostList
-                title="Honest Reviews"
-                url="/honest-reviews"
-                id="honest-reviews"
-                posts={allHonestReviewsPosts}
-            />
-            <PostList title="Shopping" url="/shopping" id="shopping" posts={allShoppingPosts} />
-            <PostList
-                title="Renovation"
-                url="/renovation"
-                id="renovation"
-                posts={allRenovationPosts}
-            />
-            <PostList
-                title="Maintenance"
-                url="/maintenance"
-                id="maintenance"
-                posts={allMaintenancePosts}
-            />
-            <PostList title="General" url="/general" id="general" posts={allGeneralPosts} />
-        </div>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <style>
-        .backgroundGradient {
-            background-image: radial-gradient(circle, #e9ffc2, #caffed, #d4ffff, #f1ffff, #ffffff);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-    </style>
 </Layout>
