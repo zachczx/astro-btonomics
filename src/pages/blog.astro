@@ -2,13 +2,32 @@
 import Layout from '../layouts/Layout.astro'
 import PostList from '../components/PostList.astro'
 import { CleanAndSort } from '../lib/utils'
+import type { CollectionEntry } from 'astro:content'
 
+// Group posts by category
 const allPosts = await CleanAndSort()
+const postsByCategory = allPosts.reduce((acc: Record<string, CollectionEntry<'blog'>[]>, post) => {
+    const category = post.data.category || 'Uncategorized'
+    if (!acc[category]) {
+        acc[category] = []
+    }
+    acc[category].push(post)
+    return acc
+}, {})
+
+// Sort categories alphabetically
+const sortedCategories = Object.keys(postsByCategory).sort()
 ---
 
 <Layout title="Blog">
     <div class="mt-8">
         <h1 class="text-primary mb-8 text-center text-4xl font-bold">All Blog Posts</h1>
-        <PostList posts={allPosts} title="" url="" id="all-posts" />
+        
+        {sortedCategories.map((category) => (
+            <div class="mb-12">
+                <h2 class="text-primary mb-6 text-2xl font-bold capitalize">{category}</h2>
+                <PostList posts={postsByCategory[category]} title="" url="" id={`category-${category}`} />
+            </div>
+        ))}
     </div>
 </Layout>
