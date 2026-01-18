@@ -8,7 +8,7 @@ import { getCategorySlug } from '../../lib/utils'
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
     const blogEntries = await getCollection('blog')
-    
+
     return blogEntries.map((entry) => ({
         params: {
             category: getCategorySlug(entry.data.category),
@@ -25,39 +25,33 @@ const { Content } = await render(entry)
 <Layout title={entry.data.title}>
     <main class="bg-base-100 rounded-2xl p-4 shadow-md lg:p-8">
         <div class="mb-16 lg:max-w-5xl">
-            <!-- Breadcrumb -->
-            <nav class="mb-6 text-sm">
-                <a href="/" class="text-primary hover:text-accent transition-colors duration-200"
-                    >Home</a
-                >
-                <span class="text-base-content/50 mx-2">/</span>
+            <nav class="text-base-content/80 mb-6 text-sm">
+                <a href="/" class="hover:text-primary transition-colors">Home</a>
+                <span class="mx-2">/</span>
                 <a
                     href={`/${getCategorySlug(entry.data.category)}`}
-                    class="text-primary hover:text-accent capitalize transition-colors duration-200"
+                    class="hover:text-primary capitalize transition-colors"
                 >
                     {entry.data.category}
                 </a>
             </nav>
 
-            <!-- Title with gradient -->
             <h1
-                class="text-base-content mb-6 bg-clip-text text-5xl leading-tight font-bold md:text-6xl"
+                class="text-base-content mb-4 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl"
             >
                 {entry.data.title}
             </h1>
 
-            <!-- Metadata section with modern cards -->
-            <div class="flex flex-wrap items-center gap-4">
-                <!-- Date badge -->
-                <div
-                    class="border-primary/40 bg-primary/10 hover:border-accent hover:bg-accent/20 flex items-center gap-2 rounded-full border px-4 py-2 backdrop-blur-sm transition-all duration-300"
-                >
+            <div
+                class="text-base-content/70 mb-6 flex flex-wrap items-center gap-4 text-sm font-medium"
+            >
+                <div class="flex items-center gap-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="1.2em"
-                        height="1.2em"
+                        width="1em"
+                        height="1em"
                         viewBox="0 0 24 24"
-                        class="text-primary"
+                        class="opacity-50"
                     >
                         <path
                             fill="currentColor"
@@ -71,46 +65,31 @@ const { Content } = await render(entry)
                     <FormattedDate date={entry.data.pubDate} />
                 </div>
 
-                <!-- Category badge -->
-                <div
-                    class="border-accent/40 bg-accent/10 text-accent rounded-full border px-4 py-2 text-sm font-medium backdrop-blur-sm"
-                >
+                <span class="opacity-30">•</span>
+
+                <div class="capitalize">
                     {entry.data.category}
                 </div>
             </div>
 
-            <!-- Tags section -->
             {
                 entry.data.tags && entry.data.tags.length > 0 && (
-                    <div class="mt-6 flex flex-wrap items-start gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1.3em"
-                            height="1.3em"
-                            class="text-accent mt-1"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                fill="currentColor"
-                                d="m21.07 10.3l-6-6a.75.75 0 0 0-.53-.22H3c-.41 0-.75.34-.75.75v7.88c0 .2.08.39.22.53l6 5.99a2.3 2.3 0 0 0 1.64.68c.62 0 1.21-.24 1.64-.68l.22-.22c.04.08.08.16.15.22a2.326 2.326 0 0 0 3.29 0l5.65-5.65c.9-.9.9-2.37 0-3.28ZM10.7 18.17c-.16.16-.36.24-.58.24s-.43-.09-.58-.24L3.75 12.4V5.58h6.82l5.78 5.78c.32.32.32.84 0 1.16zm9.31-5.65l-5.65 5.65c-.32.32-.85.32-1.17 0a.7.7 0 0 0-.23-.15l4.44-4.44c.9-.91.9-2.38 0-3.28l-4.72-4.72h1.54L20 11.36c.32.32.32.84 0 1.16ZM8.25 8.5a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0"
-                            />
-                        </svg>
+                    <div class="flex flex-wrap gap-2">
                         {entry.data.tags.map((tag) => (
                             <a
                                 href={`/tag/${tag}`}
-                                class="group border-base-content/20 bg-base-content/5 hover:border-primary hover:bg-primary/20 hover:text-primary hover:shadow-primary/30 relative overflow-hidden rounded-full border px-3 py-1 text-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                                class="bg-base-200 hover:bg-primary rounded-full px-3 py-1 text-xs transition-colors duration-200 hover:text-white"
                             >
-                                <span class="relative z-10">{tag}</span>
+                                {tag}
                             </a>
                         ))}
                     </div>
                 )
             }
 
-            <!-- Divider -->
-            <div class="via-primary/50 mt-8 h-px bg-linear-to-r from-transparent to-transparent">
-            </div>
+            <div class="border-base-300 mt-8 mb-12 border-t"></div>
         </div>
+
         <Prose>
             <Content />
         </Prose>
