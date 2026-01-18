@@ -8,7 +8,7 @@ import { getCollection, render } from 'astro:content'
 import { Image } from 'astro:assets'
 import headerImage from '../../images/36_upload_IMG_20180730_204953_header.jpg'
 import headerImage0 from '../../images/3_concept1_header-topaz-enhance-4x.webp'
-import { GetPid, GetUniqueTags } from '../../lib/utils'
+import { GetUniqueTags } from '../../lib/utils'
 
 async function CleanAndSort(category = '') {
     let posts
@@ -24,7 +24,7 @@ async function CleanAndSort(category = '') {
         entry.data.category = entry.data.category.toLowerCase().replace(' ', '-')
     })
 
-    posts.sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
+    posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
     return posts
 }
@@ -113,7 +113,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Honest Reviews')
-                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
+                                .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -152,7 +152,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Shopping')
-                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
+                                .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
                                 .map((entry) => (
                                     <div>
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -191,7 +191,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Renovation')
-                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
+                                .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -230,7 +230,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'Maintenance')
-                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
+                                .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>
@@ -268,7 +268,7 @@ const { tag } = Astro.params
                         {
                             filtered
                                 .filter((entry) => entry.data.category === 'General')
-                                .sort((a, b) => (b.data.pid ?? 0) - (a.data.pid ?? 0))
+                                .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
                                 .map((entry) => (
                                     <div class="">
                                         <a href={entry.data.category + '/' + entry.data.slug}>

@@ -1,12 +1,12 @@
 import { getCollection, type CollectionEntry } from 'astro:content'
 
-export async function GetPid() {
-    const allPosts = await getCollection('blog')
+// export async function GetPid() {
+//     const allPosts = await getCollection('blog')
 
-    allPosts.sort((a, b) => (a.data.pid || 0) - (b.data.pid || 0))
-    const lastId = allPosts[allPosts.length - 1].data.pid
-    console.log(lastId)
-}
+//     allPosts.sort((a, b) => (a.data.pid || 0) - (b.data.pid || 0))
+//     const lastId = allPosts[allPosts.length - 1].data.pid
+//     console.log(lastId)
+// }
 
 /**
  *
@@ -40,11 +40,7 @@ export async function CleanAndSort() {
 
 
     posts.sort((a, b) => {
-        if (!a.data.pid && !b.data.pid) return 0
-        if (!a.data.pid) return 1
-        if (!b.data.pid) return -1
-
-        return a.data.pid - b.data.pid
+         return b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
     })
 
     return posts
@@ -54,7 +50,7 @@ export function FilterCleanSort(collection: CollectionEntry<'blog'>[], filter: s
     const posts = collection.filter((entry) => {
         return entry.data.category === filter
     })
-    posts.sort((a, b) => (b.data.pid || 0) - (a.data.pid || 0))
+    posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     return posts
 }
 

@@ -51,7 +51,7 @@ posts.sort((a, b) => {
     if (a.data.pubDate && b.data.pubDate) {
         return b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
     }
-    return (b.data.pid || 0) - (a.data.pid || 0)
+    return 0
 })
 
 let pageTitle = ''
