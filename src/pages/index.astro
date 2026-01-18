@@ -121,16 +121,13 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
                 {
                     latestPosts.map((post, index) => {
-                        const badgeColors = ['badge-primary', 'badge-secondary', 'badge-accent']
-                        const badgeColor = badgeColors[index % 3]
-
                         return (
                             <article
                                 class={`group transition-all duration-500 hover:scale-102 hover:rotate-[0.5deg]`}
                             >
                                 <a href={`/${post.data.category}/${post.data.slug}`} class="block">
                                     <div class="bg-white p-4 shadow transition-shadow duration-500 hover:shadow-md">
-                                        <div class="bg-base-200 relative mb-4 aspect-square overflow-hidden">
+                                        <div class="bg-base-200 mb-4 aspect-square overflow-hidden">
                                             {post.data.image && (
                                                 <Image
                                                     src={post.data.image}
@@ -140,15 +137,14 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
                                                     class="h-full w-full object-cover"
                                                 />
                                             )}
-                                            <div class="absolute top-2 right-2">
-                                                <span
-                                                    class={`badge ${badgeColor} badge-sm font-semibold shadow-md`}
-                                                >
-                                                    {post.data.tags?.[0] || 'Post'}
-                                                </span>
-                                            </div>
                                         </div>
-
+                                        <div class="mb-2 flex justify-center">
+                                            <span
+                                                class={`btn btn-soft btn-primary btn-sm rounded-full`}
+                                            >
+                                                {post.data.tags?.[0] || 'Post'}
+                                            </span>
+                                        </div>
                                         <div class="text-center">
                                             <h3 class="group-hover:text-primary mb-2 line-clamp-2 text-lg leading-tight font-bold transition-colors">
                                                 {post.data.title}
@@ -168,12 +164,9 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
 
         <section class="bg-base-200/30 py-20">
             <div class="container mx-auto px-4">
-                <div class="mb-12 text-center">
-                    <h2 class="text-base-content mb-3 text-4xl font-bold md:text-5xl">
-                        Browse by Topic
-                    </h2>
-                    <p class="text-base-content/60">Filed and organized for you</p>
-                </div>
+                <h2 class="text-base-content mb-12 text-center text-4xl font-bold md:text-5xl">
+                    Browse by Topic
+                </h2>
 
                 <div
                     class="mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 md:gap-10 lg:grid-cols-3"
