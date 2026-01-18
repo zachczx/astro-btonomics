@@ -25,7 +25,7 @@ const sortedCategories = Object.keys(postsByCategory).sort()
         
         {sortedCategories.map((category) => (
             <div class="mb-12">
-                <h2 class="text-primary mb-6 text-2xl font-bold capitalize">{category}</h2>
+                <h2 class="text-primary mb-6 text-2xl font-bold capitalize">{category.replace(/-/g, ' ')}</h2>
                 <PostList posts={postsByCategory[category]} title="" url="" id={`category-${category}`} />
             </div>
         ))}
