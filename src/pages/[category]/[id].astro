@@ -1,11 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import TableOfContents from '../../components/TableOfContents.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
 import { getCollection, render } from 'astro:content'
 import Prose from '../../components/Prose.astro'
 import { getCategorySlug } from '../../lib/utils'
 
-// 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
     const blogEntries = await getCollection('blog')
 
@@ -17,63 +17,79 @@ export async function getStaticPaths() {
         props: { entry },
     }))
 }
-// 2. For your template, you can get the entry directly from the prop
+
 const { entry } = Astro.props
-const { Content } = await render(entry)
+const { Content, headings } = await render(entry)
 ---
 
 <Layout title={entry.data.title}>
-    <main class="bg-base-100 rounded-2xl p-4 shadow-md lg:p-8">
-        <div class="mb-16 lg:max-w-5xl">
-            <nav class="text-base-content/80 mb-6 text-sm">
-                <a href="/" class="hover:text-primary transition-colors">Home</a>
-                <span class="mx-2">/</span>
-                <a
-                    href={`/${getCategorySlug(entry.data.category)}`}
-                    class="hover:text-primary capitalize transition-colors"
+    <div class="mx-auto w-full max-w-[1440px] lg:flex lg:gap-8">
+        <main class="bg-base-100 min-w-0 flex-1 rounded-2xl p-4 shadow-md lg:p-8">
+            <div class="mb-16 lg:max-w-5xl">
+                <nav class="text-base-content/80 mb-6 text-sm">
+                    <a href="/" class="hover:text-primary transition-colors">Home</a>
+                    <span class="mx-2">/</span>
+                    <a
+                        href={`/${getCategorySlug(entry.data.category)}`}
+                        class="hover:text-primary capitalize transition-colors"
+                    >
+                        {entry.data.category}
+                    </a>
+                </nav>
+
+                <h1
+                    class="text-base-content mb-4 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl"
                 >
-                    {entry.data.category}
-                </a>
-            </nav>
+                    {entry.data.title}
+                </h1>
 
-            <h1
-                class="text-base-content mb-4 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl"
-            >
-                {entry.data.title}
-            </h1>
+                <div
+                    class="text-base-content/70 mb-6 flex flex-wrap items-center gap-4 text-sm font-medium"
+                >
+                    <time><FormattedDate date={entry.data.pubDate} /></time>
 
-            <div
-                class="text-base-content/70 mb-6 flex flex-wrap items-center gap-4 text-sm font-medium"
-            >
-                <time><FormattedDate date={entry.data.pubDate} /></time>
+                    <span class="opacity-30">•</span>
 
-                <span class="opacity-30">•</span>
-
-                <div class="capitalize">
-                    {entry.data.category}
+                    <div class="capitalize">
+                        {entry.data.category}
+                    </div>
                 </div>
+
+                {
+                    entry.data.tags && entry.data.tags.length > 0 && (
+                        <div class="flex flex-wrap gap-2">
+                            {entry.data.tags.map((tag) => (
+                                <a
+                                    href={`/tag/${tag}`}
+                                    class="bg-base-200 hover:bg-primary rounded-full px-3 py-1 text-xs transition-colors duration-200 hover:text-white"
+                                >
+                                    {tag}
+                                </a>
+                            ))}
+                        </div>
+                    )
+                }
+
+                <div class="border-base-300 mt-8 mb-12 border-t"></div>
             </div>
 
-            {
-                entry.data.tags && entry.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-2">
-                        {entry.data.tags.map((tag) => (
-                            <a
-                                href={`/tag/${tag}`}
-                                class="bg-base-200 hover:bg-primary rounded-full px-3 py-1 text-xs transition-colors duration-200 hover:text-white"
-                            >
-                                {tag}
-                            </a>
-                        ))}
-                    </div>
-                )
-            }
+            <article>
+                <Prose>
+                    <Content />
+                </Prose>
+            </article>
+        </main>
 
-            <div class="border-base-300 mt-8 mb-12 border-t"></div>
-        </div>
-
-        <Prose>
-            <Content />
-        </Prose>
-    </main>
+        <aside class="hidden shrink-0 lg:block lg:w-72">
+            <div class="h-20"></div>
+            <div class="sticky top-8">
+                <h2
+                    class="text-base-content/50 mb-4 pl-4 text-xs font-bold tracking-wider uppercase"
+                >
+                    On this page
+                </h2>
+                <TableOfContents headings={headings} />
+            </div>
+        </aside>
+    </div>
 </Layout>

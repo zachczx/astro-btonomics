@@ -99,6 +99,11 @@
     :root {
         /* Reserve space for scrollbar to prevent layout jumping */
         scrollbar-gutter: stable;
+        /* Ensure headings land below fixed headers (and inside our IO zone) */
+        scroll-padding-top: 100px;
+    }
+    html {
+        scroll-behavior: smooth;
     }
 }
 
