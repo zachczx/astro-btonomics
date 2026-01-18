@@ -189,10 +189,14 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
                                     class={`group block ${rotation} transition-all duration-500 hover:scale-105 hover:rotate-0`}
                                 >
                                     <div class="bg-white p-6 shadow-md transition-shadow duration-500 hover:shadow-lg">
-                                        <div class="bg-base-200/30 group-hover:bg-primary/5 mb-4 flex aspect-square items-center justify-center transition-colors">
-                                            <div class="text-8xl">
-                                                <cat.icon />
-                                            </div>
+                                        <div class="bg-base-200/30 group-hover:bg-primary/5 mb-4 flex aspect-square items-center justify-center overflow-hidden transition-colors">
+                                            {cat.icon && (
+                                                <Image
+                                                    src={cat.icon}
+                                                    alt="icon"
+                                                    class={`h-full w-full object-cover`}
+                                                />
+                                            )}
                                         </div>
 
                                         <div class="text-center">
