@@ -16,6 +16,7 @@ const blog = defineCollection({
             image: image().optional(),
             tags: z.array(z.string()).optional(),
             slug: z.string().optional(),
+            mood: z.string().optional(),
         }),
 })
 
