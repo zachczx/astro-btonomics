@@ -8,12 +8,18 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { categories } from '../data/categories'
 
+import CryingEmoji from '~icons/noto/loudly-crying-face'
+import Party from '~icons/noto/party-popper'
+
 dayjs.extend(relativeTime)
 
 const allPosts = await CleanAndSort()
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
 const latestPosts = allPosts.slice(0, 6)
+
+const regretPost = allPosts.find((post) => post.data.mood === 'negative')
+const worthItPost = allPosts.find((post) => post.data.mood === 'positive')
 
 const categoryCounts: Record<string, number> = {}
 categories.forEach((cat) => {
@@ -26,6 +32,17 @@ categories.forEach((cat) => {
 })
 
 const formatDate = (date: Date) => dayjs(date).fromNow()
+
+const allStats = [
+    '💡 Taobao light bulbs bought: 48 | Used so far: 6',
+    '📱 "Sorry to disturb" messages to ID: ∞',
+    "🔍 Defects at handover: 23 | Defects we've accumulated since: 2000+",
+    '🧸 Floor space remaining after a kid: 15%',
+    '🏠 2018: minimalist dream | 2026: toy minefield',
+    '🛒 Hours on Taobao at 2am: too many',
+]
+const shuffled = [...allStats].sort(() => Math.random() - 0.5)
+const displayStats = shuffled.slice(0, 3)
 ---
 
 <Layout title="Home">
@@ -51,10 +68,10 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
                             <h2
                                 class="text-base-content group-hover:text-primary mb-1 text-3xl font-bold transition-colors"
                             >
-                                The Concept
+                                The Vision
                             </h2>
-                            <p class="text-base-content/70 text-sm leading-relaxed">
-                                Planning, decisions, and lessons learned
+                            <p class="text-base-content/70 text-sm leading-relaxed italic">
+                                When we still thought "minor delays" meant days
                             </p>
                         </div>
                     </div>
@@ -79,19 +96,120 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
                             <h2
                                 class="text-base-content group-hover:text-primary mb-1 text-3xl font-bold transition-colors"
                             >
-                                The Result
+                                The Reality
                             </h2>
-                            <p class="text-base-content/70 text-sm leading-relaxed">
-                                Real transformations and honest reviews
+                            <p class="text-base-content/70 text-sm leading-relaxed italic">
+                                6 months, 47 arguments, and one beautiful home later
                             </p>
                         </div>
                     </div>
                 </a>
             </div>
+
+            <div
+                class="mx-auto mt-12 flex max-w-4xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm"
+            >
+                {
+                    displayStats.map((stat, i) => (
+                        <>
+                            <span class="text-base-content/60">{stat}</span>
+                            {i < displayStats.length - 1 && (
+                                <span class="text-base-content/30 hidden sm:inline">•</span>
+                            )}
+                        </>
+                    ))
+                }
+            </div>
         </div>
     </div>
 
     <main class="bg-base-200/30 space-y-20 py-12 md:py-16">
+        {
+            (regretPost || worthItPost) && (
+                <section class="container mx-auto px-4">
+                    <h2 class="text-base-content mb-8 text-center text-3xl font-bold md:text-4xl">
+                        The Honest Truth
+                    </h2>
+
+                    <div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
+                        {regretPost && (
+                            <a
+                                href={`/${regretPost.data.category}/${regretPost.data.slug}`}
+                                class="group block rotate-1 transition-all duration-500 hover:scale-105 hover:rotate-0"
+                            >
+                                <div class="bg-white p-5 shadow-md transition-shadow duration-500 hover:shadow-lg">
+                                    <div class="bg-base-200 mb-4 aspect-video overflow-hidden">
+                                        {regretPost.data.image && (
+                                            <Image
+                                                src={regretPost.data.image}
+                                                alt={regretPost.data.title}
+                                                width={600}
+                                                height={338}
+                                                class="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+                                            />
+                                        )}
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="mb-2 inline-flex items-center gap-1.5">
+                                            <span class="text-xl">
+                                                <CryingEmoji />
+                                            </span>
+                                            <span class="text-error text-lg font-bold tracking-wide uppercase">
+                                                Fail
+                                            </span>
+                                        </div>
+                                        <h3 class="text-base-content group-hover:text-primary mb-1 text-lg font-bold transition-colors">
+                                            {regretPost.data.title}
+                                        </h3>
+                                        <p class="text-base-content/60 text-sm italic">
+                                            Read the cautionary tale
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        )}
+
+                        {worthItPost && (
+                            <a
+                                href={`/${worthItPost.data.category}/${worthItPost.data.slug}`}
+                                class="group block -rotate-1 transition-all duration-500 hover:scale-105 hover:rotate-0"
+                            >
+                                <div class="bg-white p-5 shadow-md transition-shadow duration-500 hover:shadow-lg">
+                                    <div class="bg-base-200 mb-4 aspect-video overflow-hidden">
+                                        {worthItPost.data.image && (
+                                            <Image
+                                                src={worthItPost.data.image}
+                                                alt={worthItPost.data.title}
+                                                width={600}
+                                                height={338}
+                                                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                        )}
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="mb-2 inline-flex items-center gap-1.5">
+                                            <span class="text-xl">
+                                                <Party />
+                                            </span>
+                                            <span class="text-success text-lg font-bold tracking-wide uppercase">
+                                                Win
+                                            </span>
+                                        </div>
+                                        <h3 class="text-base-content group-hover:text-primary mb-1 text-lg font-bold transition-colors">
+                                            {worthItPost.data.title}
+                                        </h3>
+                                        <p class="text-base-content/60 text-sm italic">
+                                            See why we'd do it again
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        )}
+                    </div>
+                </section>
+            )
+        }
+
         <section class="container mx-auto px-4">
             <div class="mb-4 flex items-end justify-between md:mb-8">
                 <div>
@@ -120,7 +238,7 @@ const formatDate = (date: Date) => dayjs(date).fromNow()
 
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
                 {
-                    latestPosts.map((post, index) => {
+                    latestPosts.map((post) => {
                         return (
                             <article
                                 class={`group transition-all duration-500 hover:scale-102 hover:rotate-[0.5deg]`}
