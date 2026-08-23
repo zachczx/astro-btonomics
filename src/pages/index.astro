@@ -65,7 +65,7 @@ categories.forEach((cat) => {
         >
             <div>
                 <span
-                    class="eyebrow border-ink/10 bg-base-100 text-secondary inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-[0.66rem]"
+                    class="eyebrow border-ink/10 bg-base-100 text-wintext inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-[0.66rem]"
                 >
                     4-room HDB · since {startYear}
                 </span>
@@ -136,7 +136,7 @@ categories.forEach((cat) => {
                 >
                     <BeforeAfterIcon class="h-6 w-6" />
                 </div>
-                <p class="eyebrow text-ink/40 mt-4 text-center text-[0.58rem]">
+                <p class="eyebrow text-ink/65 mt-4 text-center text-[0.58rem]">
                     Our actual living room, the 3D render vs. move-in day
                 </p>
             </div>
@@ -148,22 +148,22 @@ categories.forEach((cat) => {
         <div
             class="container mx-auto flex flex-wrap items-baseline justify-center gap-x-5 gap-y-1.5 px-4 py-5 text-sm sm:gap-x-8"
         >
-            <span class="ledger text-ink/55">
+            <span class="ledger text-ink/70">
                 <strong class="text-ink text-lg font-extrabold">{postCount}</strong> posts
             </span>
             <span class="text-ink/20" aria-hidden="true">/</span>
-            <span class="ledger text-ink/55">
+            <span class="ledger text-ink/70">
                 <strong class="text-ink text-lg font-extrabold">{yearsDocumented}</strong> years
             </span>
             <span class="text-ink/20" aria-hidden="true">/</span>
-            <span class="ledger text-ink/55">
+            <span class="ledger text-ink/70">
                 <strong class="text-ink text-lg font-extrabold">{reviewCount}</strong> honest verdicts
             </span>
             <span class="text-ink/20" aria-hidden="true">/</span>
-            <span class="ledger text-ink/55">
-                <strong class="text-secondary text-lg font-extrabold">{winCount}</strong> wins /
+            <span class="ledger text-ink/70">
+                <strong class="text-wintext text-lg font-extrabold">{winCount}</strong> wins /
                 <strong class="text-ink text-lg font-extrabold">{lessonCount}</strong> lessons /
-                <strong class="text-primary text-lg font-extrabold">{failCount}</strong> fails
+                <strong class="text-failtext text-lg font-extrabold">{failCount}</strong> fails
             </span>
         </div>
     </section>
@@ -226,7 +226,7 @@ categories.forEach((cat) => {
                                                         rating={regretPost.data.rating}
                                                         tone="primary"
                                                     />
-                                                    <span class="ledger text-ink/45 text-xs">
+                                                    <span class="ledger text-ink/65 text-xs">
                                                         {regretPost.data.rating}/5
                                                     </span>
                                                 </span>
@@ -284,7 +284,7 @@ categories.forEach((cat) => {
                                                     title={`${worthItPost.data.rating} out of 5`}
                                                 >
                                                     <RatingStars rating={worthItPost.data.rating} />
-                                                    <span class="ledger text-ink/45 text-xs">
+                                                    <span class="ledger text-ink/65 text-xs">
                                                         {worthItPost.data.rating}/5
                                                     </span>
                                                 </span>
@@ -318,8 +318,8 @@ categories.forEach((cat) => {
                 href="/search"
                 class="border-base-300 bg-base-100 hover:border-ink/30 group flex items-center gap-3 rounded-full border-2 px-5 py-3.5 transition-colors"
             >
-                <SearchIcon class="text-ink/40 h-[1.15em] w-[1.15em] shrink-0" aria-hidden="true" />
-                <span class="text-ink/45 truncate"
+                <SearchIcon class="text-ink/60 h-[1.15em] w-[1.15em] shrink-0" aria-hidden="true" />
+                <span class="text-ink/65 truncate"
                     >Search {postCount} posts: vinyl, Taobao, aircon…</span
                 >
                 <span
@@ -328,7 +328,7 @@ categories.forEach((cat) => {
                 >
             </a>
 
-            <p class="eyebrow text-ink/40 mt-8 mb-4 text-[0.62rem]">Or jump to a category</p>
+            <p class="eyebrow text-ink/65 mt-8 mb-4 text-[0.62rem]">Or jump to a category</p>
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
                 {
                     categories.map((cat) => (
@@ -340,7 +340,7 @@ categories.forEach((cat) => {
                             <span class="font-heading text-ink group-hover:text-primary mt-4 font-bold transition-colors">
                                 {cat.name}
                             </span>
-                            <span class="ledger text-ink/45 mt-1 text-xs">
+                            <span class="ledger text-ink/65 mt-1 text-xs">
                                 {categoryCounts[cat.slug]} posts
                             </span>
                         </a>
