@@ -10,89 +10,106 @@ import MenuIcon from '~icons/mingcute/menu-line'
     class="border-base-300 bg-paper/85 sticky top-0 z-50 border-b backdrop-blur-md"
     id="main-navbar"
 >
-    <nav class="container mx-auto flex items-center justify-between gap-4 px-4 py-3.5">
-        <a href="/" class="flex items-center gap-2.5">
-            <span class="bg-primary block h-3.5 w-3.5 rounded-[4px]"></span>
-            <span class="font-heading text-ink text-2xl font-extrabold tracking-tight"
-                >BTOnomics</span
-            >
-        </a>
-
-        <div class="hidden items-center gap-1 lg:flex">
-            <div class="dropdown dropdown-hover dropdown-end">
-                <div
-                    tabindex="0"
-                    role="button"
-                    class="text-ink/75 hover:bg-softcoral hover:text-primary inline-flex items-center gap-1 rounded-full px-4 py-2 font-semibold transition-colors"
+    <nav class="container mx-auto px-4" aria-label="Primary">
+        <div class="hidden lg:block">
+            <div class="grid grid-cols-[1fr_auto_1fr] items-center py-3">
+                <p class="eyebrow text-ink/70 text-[0.62rem]">4-room HDB · since 2018</p>
+                <a href="/" class="flex items-center gap-2.5 justify-self-center">
+                    <span class="bg-primary block h-3.5 w-3.5 rounded-[4px]"></span>
+                    <span class="font-heading text-ink text-3xl font-extrabold tracking-tight"
+                        >BTOnomics</span
+                    >
+                </a>
+                <a
+                    href="/search"
+                    class="text-ink hover:text-primary inline-flex items-center gap-2 justify-self-end text-sm font-semibold transition-colors"
                 >
-                    Browse
-                    <DropdownIcon class="h-4 w-4 opacity-60" aria-hidden="true" />
+                    <SearchIcon class="h-4 w-4" aria-hidden="true" />
+                    Search the diary
+                </a>
+            </div>
+
+            <div class="border-base-300 flex items-center justify-center gap-1 border-t py-2">
+                <div class="dropdown dropdown-hover">
+                    <div
+                        tabindex="0"
+                        role="button"
+                        class="text-ink/75 hover:text-primary inline-flex items-center gap-1 px-4 py-1.5 font-semibold transition-colors"
+                    >
+                        Browse
+                        <DropdownIcon class="h-4 w-4 opacity-60" aria-hidden="true" />
+                    </div>
+                    <ul
+                        tabindex="0"
+                        class="dropdown-content border-base-300 bg-base-100 rounded-box z-[1] mt-2 w-60 border p-2 shadow-lg"
+                    >
+                        {
+                            categories.map((cat) => (
+                                <li>
+                                    <a
+                                        href={`/${cat.slug}`}
+                                        class="hover:bg-base-200 flex items-center gap-3 rounded-lg px-3 py-2 transition-colors"
+                                    >
+                                        <CategorySwatch
+                                            color={cat.swatch}
+                                            class="h-7 w-7 rounded-md"
+                                        />
+                                        <span class="text-ink font-semibold">{cat.name}</span>
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+                <a
+                    href="/blog"
+                    class="text-ink/75 hover:text-primary px-4 py-1.5 font-semibold transition-colors"
+                    >All posts</a
+                >
+                <a
+                    href="/verdicts"
+                    class="text-ink/75 hover:text-primary px-4 py-1.5 font-semibold transition-colors"
+                    >Verdicts</a
+                >
+                <a
+                    href="/about-us"
+                    class="text-ink/75 hover:text-primary px-4 py-1.5 font-semibold transition-colors"
+                    >About</a
+                >
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 py-3.5 lg:hidden">
+            <a href="/" class="flex items-center gap-2.5">
+                <span class="bg-primary block h-3.5 w-3.5 rounded-[4px]"></span>
+                <span class="font-heading text-ink text-2xl font-extrabold tracking-tight"
+                    >BTOnomics</span
+                >
+            </a>
+
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-sm" aria-label="Menu">
+                    <MenuIcon class="h-5 w-5" aria-hidden="true" />
                 </div>
                 <ul
                     tabindex="0"
-                    class="dropdown-content border-base-300 bg-base-100 rounded-box z-[1] mt-2 w-60 border p-2 shadow-lg"
+                    class="menu menu-sm dropdown-content border-base-300 bg-base-100 rounded-box z-[1] mt-3 w-52 border p-2 shadow-lg"
                 >
+                    <li class="menu-title text-ink/40">Browse</li>
                     {
                         categories.map((cat) => (
                             <li>
-                                <a
-                                    href={`/${cat.slug}`}
-                                    class="hover:bg-base-200 flex items-center gap-3 rounded-lg px-3 py-2 transition-colors"
-                                >
-                                    <CategorySwatch color={cat.swatch} class="h-7 w-7 rounded-md" />
-                                    <span class="text-ink font-semibold">{cat.name}</span>
-                                </a>
+                                <a href={`/${cat.slug}`}>{cat.name}</a>
                             </li>
                         ))
                     }
+                    <li><div class="bg-base-300 my-1 h-px"></div></li>
+                    <li><a href="/blog">All posts</a></li>
+                    <li><a href="/verdicts">Verdicts</a></li>
+                    <li><a href="/search">Search</a></li>
+                    <li><a href="/about-us">About</a></li>
                 </ul>
             </div>
-            <a
-                href="/blog"
-                class="text-ink/75 hover:bg-softcoral hover:text-primary rounded-full px-4 py-2 font-semibold transition-colors"
-                >All posts</a
-            >
-            <a
-                href="/verdicts"
-                class="text-ink/75 hover:bg-softcoral hover:text-primary rounded-full px-4 py-2 font-semibold transition-colors"
-                >Verdicts</a
-            >
-            <a
-                href="/about-us"
-                class="text-ink/75 hover:bg-softcoral hover:text-primary rounded-full px-4 py-2 font-semibold transition-colors"
-                >About</a
-            >
-            <a
-                href="/search"
-                class="bg-neutral text-neutral-content ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 font-semibold transition-transform hover:-translate-y-0.5"
-            >
-                <SearchIcon class="h-4 w-4" aria-hidden="true" />
-                Search
-            </a>
-        </div>
-
-        <div class="dropdown dropdown-end lg:hidden">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-sm" aria-label="Menu">
-                <MenuIcon class="h-5 w-5" aria-hidden="true" />
-            </div>
-            <ul
-                tabindex="0"
-                class="menu menu-sm dropdown-content border-base-300 bg-base-100 rounded-box z-[1] mt-3 w-52 border p-2 shadow-lg"
-            >
-                <li class="menu-title text-ink/40">Browse</li>
-                {
-                    categories.map((cat) => (
-                        <li>
-                            <a href={`/${cat.slug}`}>{cat.name}</a>
-                        </li>
-                    ))
-                }
-                <li><div class="bg-base-300 my-1 h-px"></div></li>
-                <li><a href="/blog">All posts</a></li>
-                <li><a href="/verdicts">Verdicts</a></li>
-                <li><a href="/search">Search</a></li>
-                <li><a href="/about-us">About</a></li>
-            </ul>
         </div>
     </nav>
 </header>
