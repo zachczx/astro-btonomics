@@ -3,17 +3,17 @@ export const MOOD_META = {
         cardLabel: 'Win',
         articleLabel: 'A win',
         filterLabel: 'Wins',
-        textClass: 'text-secondary',
+        textClass: 'text-wintext',
         dotClass: 'bg-secondary',
-        badgeClass: 'bg-success/12 text-success',
+        badgeClass: 'bg-success/12 text-wintext',
     },
     negative: {
         cardLabel: 'Fail',
         articleLabel: 'A regret',
         filterLabel: 'Fails',
-        textClass: 'text-error',
+        textClass: 'text-failtext',
         dotClass: 'bg-error',
-        badgeClass: 'bg-error/12 text-error',
+        badgeClass: 'bg-error/12 text-failtext',
     },
     neutral: {
         cardLabel: 'Lesson',
@@ -40,11 +40,11 @@ export function getMoodMeta(mood?: string) {
 export const RECOMMENDATION_META = {
     yes: {
         label: 'Would do again',
-        tintClass: 'bg-softteal text-secondary',
+        tintClass: 'bg-softteal text-wintext',
     },
     no: {
         label: 'Would skip',
-        tintClass: 'bg-softcoral text-primary',
+        tintClass: 'bg-softcoral text-failtext',
     },
     maybe: {
         label: 'It depends',

@@ -51,6 +51,8 @@
     --color-softteal: #def3f3;
     --color-softmarigold: #fff1d6;
     --color-blueprint: #c9b8a3;
+    --color-wintext: #08747a;
+    --color-failtext: #b83a2d;
 }
 
 @layer base {
